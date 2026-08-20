@@ -55,10 +55,29 @@ const totalImpactEl = document.getElementById('totalImpact');
 const chartBars = document.getElementById('chartBars');
 
 // ============================================================
-// RENDER TIMELINE – Dark Tides Style
+// HELPER – Get Icon Class
+// ============================================================
+function getIconForType(type) {
+    const map = {
+        'Worm': 'bug',
+        'Virus': 'virus',
+        'Ransomware': 'lock',
+        'Data Breach': 'user-secret',
+        'DDoS': 'server',
+        'Supply Chain': 'chain',
+        'APT': 'user-astronaut',
+        'Other': 'exclamation-triangle'
+    };
+    return map[type] || 'circle';
+}
+
+// ============================================================
+// RENDER TIMELINE – Dark Tides Style (Fixed)
 // ============================================================
 function renderTimeline(data) {
-    if (data.length === 0) {
+    console.log('Rendering timeline with', data.length, 'items'); // Debug log
+
+    if (!data || data.length === 0) {
         timeline.innerHTML = `
             <div class="empty-state">
                 <i class="fas fa-search"></i>
@@ -69,28 +88,36 @@ function renderTimeline(data) {
         return;
     }
 
-    timeline.innerHTML = data.map((a, i) => {
-        // Split description into bullet points if it contains multiple sentences
-        const sentences = a.description.split(/\.\s+/).filter(s => s.length > 0);
-        let descriptionHtml = '';
-        if (sentences.length > 1) {
-            descriptionHtml = `<ul class="description-list">
-                ${sentences.map(s => `<li>${s}.</li>`).join('')}
-            </ul>`;
-        } else {
-            descriptionHtml = `<div class="description">${a.description}</div>`;
-        }
+    try {
+        let html = data.map((a, i) => {
+            // Safe description split
+            let desc = a.description || '';
+            let sentences = desc.split(/\.\s+/).filter(s => s.length > 0);
+            let descriptionHtml = '';
+            if (sentences.length > 1) {
+                descriptionHtml = `<ul class="description-list">
+                    ${sentences.map(s => `<li>${s}.</li>`).join('')}
+                </ul>`;
+            } else {
+                descriptionHtml = `<div class="description">${desc}</div>`;
+            }
 
-        return `
-            <div class="timeline-item" data-type="${a.type}" style="animation-delay: ${i * 0.04}s">
-                <div class="badge-date">${a.type} · ${a.year}</div>
-                <div class="title">${a.title}</div>
-                ${descriptionHtml}
-                <div class="impact"><strong>Impact:</strong> ${a.impact}</div>
-                <div class="icon-type"><i class="fas fa-${getIconForType(a.type)}"></i></div>
-            </div>
-        `;
-    }).join('');
+            return `
+                <div class="timeline-item" data-type="${a.type || 'Other'}" style="animation-delay: ${i * 0.04}s">
+                    <div class="badge-date">${a.type || 'Unknown'} · ${a.year || 'N/A'}</div>
+                    <div class="title">${a.title || 'Untitled'}</div>
+                    ${descriptionHtml}
+                    <div class="impact"><strong>Impact:</strong> ${a.impact || 'Unknown'}</div>
+                    <div class="icon-type"><i class="fas fa-${getIconForType(a.type)}"></i></div>
+                </div>
+            `;
+        }).join('');
+
+        timeline.innerHTML = html;
+    } catch (err) {
+        console.error('Error rendering timeline:', err);
+        timeline.innerHTML = `<div class="empty-state"><p>Error loading timeline. Check console for details.</p></div>`;
+    }
 }
 
 // ============================================================
@@ -123,7 +150,6 @@ function updateStats(data) {
     const decades = new Set(data.map(a => Math.floor(a.year / 10) * 10));
     totalDecadesEl.textContent = decades.size;
 
-    // Estimate total impact (simplified)
     const impactMap = {
         'Worm': 1.5, 'Virus': 2, 'Ransomware': 4, 'Data Breach': 3,
         'DDoS': 1, 'Supply Chain': 5, 'APT': 4, 'Other': 1
