@@ -750,3 +750,86 @@ body {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
 }
+
+/* ============================================
+   SCROLL PROGRESS BAR
+   ============================================ */
+#scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+    z-index: 9999;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 12px var(--accent-glow);
+}
+
+/* ============================================
+   CUSTOM CURSOR
+   ============================================ */
+.custom-cursor {
+    position: fixed;
+    pointer-events: none;
+    z-index: 99999;
+    transform: translate(-50%, -50%);
+    transition: width 0.15s ease, height 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 16px var(--accent-glow);
+}
+
+.cursor-ring {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1.5px solid var(--accent);
+    opacity: 0.6;
+    transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+}
+
+/* Hover effect on interactive elements */
+a:hover ~ .custom-cursor .cursor-ring,
+button:hover ~ .custom-cursor .cursor-ring,
+.timeline-item:hover ~ .custom-cursor .cursor-ring {
+    width: 44px;
+    height: 44px;
+    opacity: 1;
+    border-color: var(--accent-hover);
+}
+
+/* Hide default cursor on interactive elements */
+a, button, .timeline-item, input, select, .btn-clear, .btn-icon {
+    cursor: none !important;
+}
+
+/* ============================================
+   CLICK RIPPLE
+   ============================================ */
+.ripple {
+    position: fixed;
+    border-radius: 50%;
+    background: rgba(74, 140, 247, 0.3);
+    transform: scale(0);
+    animation: rippleAnim 0.6s ease-out forwards;
+    pointer-events: none;
+    z-index: 99998;
+}
+
+@keyframes rippleAnim {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* ============================================
+   ENHANCED STAR FIELD (already have particles, but we'll keep it)
+   ============================================ */
+/* The particle canvas is already styled, we'll just keep it */
