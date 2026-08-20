@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cyber Attack Timeline – The Complete History</title>
+
+    <!-- Preconnect for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-shield-halved"></i> Cyber Timeline
+            </a>
+            <div class="nav-actions">
+                <button class="btn-icon" id="randomBtn" aria-label="Random attack">
+                    <i class="fas fa-shuffle"></i>
+                </button>
+                <button class="btn-icon" id="shareBtn" aria-label="Share timeline">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+                <button class="btn-icon" id="darkToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== HERO SECTION ===== -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-bolt"></i> Interactive History
+            </div>
+            <h1>Cyber Attack Timeline</h1>
+            <p class="hero-subtitle">
+                From the first computer worm to modern ransomware — explore the attacks that shaped cybersecurity.
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" id="totalAttacks">0</span>
+                    <span class="stat-label">Attacks</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" id="totalDecades">0</span>
+                    <span class="stat-label">Decades</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" id="totalImpact">$0</span>
+                    <span class="stat-label">Total Impact</span>
+                </div>
+            </div>
+            <div class="hero-scroll">
+                <span>Scroll to explore</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </div>
+        <div class="hero-glow"></div>
+    </header>
+
+    <!-- ===== FILTER BAR ===== -->
+    <section class="filters" aria-label="Filter controls">
+        <div class="filter-container">
+            <div class="filter-group">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search attacks..." />
+            </div>
+            <div class="filter-group">
+                <i class="fas fa-calendar"></i>
+                <select id="decadeFilter">
+                    <option value="all">All Decades</option>
+                    <option value="1980">1980s</option>
+                    <option value="1990">1990s</option>
+                    <option value="2000">2000s</option>
+                    <option value="2010">2010s</option>
+                    <option value="2020">2020s</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <i class="fas fa-tag"></i>
+                <select id="typeFilter">
+                    <option value="all">All Types</option>
+                    <option value="Worm">Worm</option>
+                    <option value="Virus">Virus</option>
+                    <option value="Ransomware">Ransomware</option>
+                    <option value="Data Breach">Data Breach</option>
+                    <option value="DDoS">DDoS</option>
+                    <option value="Supply Chain">Supply Chain</option>
+                    <option value="APT">APT</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <button class="btn-clear" id="clearFilters">
+                <i class="fas fa-times"></i> Clear
+            </button>
+        </div>
+    </section>
+
+    <!-- ===== STATS CHART ===== -->
+    <section class="stats-chart" id="statsChart" aria-label="Attack statistics">
+        <div class="chart-container">
+            <h2>Attacks by Decade</h2>
+            <div class="chart-bars" id="chartBars"></div>
+        </div>
+    </section>
+
+    <!-- ===== TIMELINE ===== -->
+    <main class="timeline" id="timeline" role="main" aria-label="Timeline of cyber attacks"></main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>
+                Built with <i class="fas fa-heart" style="color: #e74c3c;"></i> by
+                <a href="https://github.com/priyanshu-rawa" target="_blank">Priyanshu Rawat</a>
+            </p>
+            <p>
+                Data sourced from public cybersecurity archives ·
+                <a href="https://github.com/priyanshu-rawa/breach-timeline" target="_blank">View on GitHub</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="script.js"></script>
+</body>
+</html>
