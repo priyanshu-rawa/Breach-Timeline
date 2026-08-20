@@ -1,6 +1,130 @@
 // ============================================================
 // DATA – Cyber Attacks (expanded)
 // ============================================================
+// ============================================================
+// PARTICLE BACKGROUND
+// ============================================================
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+let mouseX = 0;
+let mouseY = 0;
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2.5 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.4;
+        this.speedY = (Math.random() - 0.5) * 0.4;
+        this.opacity = Math.random() * 0.6 + 0.2;
+    }
+    update() {
+        // Gentle drift with mouse influence
+        const dx = mouseX - this.x;
+        const dy = mouseY - this.y;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        if (dist < 200) {
+            const force = (200 - dist) / 200 * 0.02;
+            this.x += (dx / dist) * force;
+            this.y += (dy / dist) * force;
+        }
+        this.x += this.speedX;
+        this.y += this.speedY;
+        // Wrap around
+        if (this.x < 0) this.x = canvas.width;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.y < 0) this.y = canvas.height;
+        if (this.y > canvas.height) this.y = 0;
+    }
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(74, 140, 247, ${this.opacity})`;
+        ctx.fill();
+    }
+}
+
+// Create 150 particles
+for (let i = 0; i < 150; i++) {
+    particles.push(new Particle());
+}
+
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+        p.update();
+        p.draw();
+    });
+    requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// Track mouse for particle interaction
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+// ============================================================
+// MOUSE PARALLAX – Hero Section
+// ============================================================
+const heroContent = document.querySelector('.hero-content');
+const heroGlow = document.querySelector('.hero-glow');
+
+document.addEventListener('mousemove', (e) => {
+    if (!heroContent || !heroGlow) return;
+    const x = (e.clientX / window.innerWidth - 0.5) * 20;
+    const y = (e.clientY / window.innerHeight - 0.5) * 20;
+    heroContent.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+    heroGlow.style.transform = `translate(${x * 0.8}px, ${y * 0.8}px)`;
+});
+
+// ============================================================
+// SCROLL REVEAL
+// ============================================================
+const revealElements = document.querySelectorAll('.timeline-item, .stat-item, .chart-container');
+
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
+
+revealElements.forEach(el => {
+    el.classList.add('reveal');
+    revealObserver.observe(el);
+});
+
+// ============================================================
+// SMOOTH SCROLL INDICATOR – Hide after first scroll
+// ============================================================
+const scrollIndicator = document.querySelector('.hero-scroll');
+let scrollHidden = false;
+
+window.addEventListener('scroll', () => {
+    if (!scrollHidden && window.scrollY > 100) {
+        scrollHidden = true;
+        scrollIndicator.style.opacity = '0';
+        scrollIndicator.style.transition = 'opacity 0.6s ease';
+        setTimeout(() => {
+            scrollIndicator.style.display = 'none';
+        }, 600);
+    }
+});
+
 const attacks = [
     // 1980s
     { year: 1988, title: 'Morris Worm', description: 'The first major internet worm, created by Robert Morris. Infected about 10% of all computers connected to the internet.', type: 'Worm', impact: '~6,000 computers, $10M+ in damages' },

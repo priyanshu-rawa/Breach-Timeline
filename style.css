@@ -674,3 +674,79 @@ body {
     transform: translate(-50%, -50%);
     opacity: 0;
 }
+
+/* ============================================
+   DYNAMIC ENHANCEMENTS
+   ============================================ */
+
+/* --- 1. Particle Background Canvas --- */
+#particle-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+/* --- 2. Mouse Parallax Layers --- */
+.parallax-layer {
+    transition: transform 0.1s ease-out;
+    will-change: transform;
+}
+
+/* --- 3. Scroll Reveal Animations --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 4. Hero Glow Enhancement --- */
+.hero-glow {
+    animation: glowPulse 6s ease-in-out infinite alternate;
+}
+@keyframes glowPulse {
+    0% { opacity: 0.3; transform: scale(1) rotate(0deg); }
+    100% { opacity: 0.8; transform: scale(1.2) rotate(5deg); }
+}
+
+/* --- 5. Smooth Hover Glow on Timeline Items --- */
+.timeline-item {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.timeline-item:hover {
+    transform: translateY(-4px) scale(1.005);
+    box-shadow: 0 12px 48px rgba(74, 140, 247, 0.15);
+    border-color: var(--accent);
+}
+
+/* --- 6. Floating Animation for Stats --- */
+.stat-item {
+    animation: floatStat 4s ease-in-out infinite;
+}
+.stat-item:nth-child(1) { animation-delay: 0s; }
+.stat-item:nth-child(2) { animation-delay: 0.5s; }
+.stat-item:nth-child(3) { animation-delay: 1s; }
+@keyframes floatStat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* --- 7. Typing Cursor Effect for Hero --- */
+.typing-cursor::after {
+    content: '|';
+    animation: blink 1s step-end infinite;
+    color: var(--accent);
+}
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
