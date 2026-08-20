@@ -695,22 +695,6 @@ body {
 }
 
 /* ============================================
-   GLOW CURSOR (Trail)
-   ============================================ */
-.glow-cursor {
-    position: fixed;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(74, 140, 247, 0.6), transparent 70%);
-    pointer-events: none;
-    z-index: 9999;
-    transition: transform 0.1s ease, opacity 0.2s ease;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-}
-
-/* ============================================
    CUSTOM CURSOR (Dot + Ring)
    ============================================ */
 .custom-cursor {

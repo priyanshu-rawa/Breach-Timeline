@@ -504,22 +504,6 @@ hoverElements.forEach(el => {
     });
 });
 
-// ============================================================
-// GLOW CURSOR (Trail)
-// ============================================================
-const glowCursor = document.createElement('div');
-glowCursor.className = 'glow-cursor';
-document.body.appendChild(glowCursor);
-
-document.addEventListener('mousemove', (e) => {
-    glowCursor.style.left = e.clientX + 'px';
-    glowCursor.style.top = e.clientY + 'px';
-    glowCursor.style.opacity = '1';
-});
-
-document.addEventListener('mouseleave', () => {
-    glowCursor.style.opacity = '0';
-});
 
 // ============================================================
 // CLICK RIPPLE
