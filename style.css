@@ -454,7 +454,7 @@ body {
 }
 
 /* ============================================
-   TIMELINE
+   TIMELINE – DARK TIDES STYLE
    ============================================ */
 .timeline {
     max-width: 900px;
@@ -464,21 +464,21 @@ body {
 
 .timeline-item {
     position: relative;
-    padding: 1.8rem 2rem 1.8rem 4.5rem;
-    margin-bottom: 1.2rem;
+    padding: 1.5rem 2rem 1.5rem 2rem;
+    margin-bottom: 1.5rem;
     border-radius: var(--radius);
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    cursor: default;
     opacity: 0;
     transform: translateY(30px);
     animation: itemReveal 0.6s ease forwards;
 }
+
 .timeline-item:hover {
-    transform: translateY(-4px) scale(1.005);
+    transform: translateY(-2px);
     border-color: var(--accent);
-    box-shadow: 0 12px 48px rgba(74, 140, 247, 0.12);
+    box-shadow: 0 8px 32px rgba(74, 140, 247, 0.08);
     background: var(--bg-card-hover);
 }
 
@@ -486,6 +486,7 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Staggered animation */
 .timeline-item:nth-child(1) { animation-delay: 0.05s; }
 .timeline-item:nth-child(2) { animation-delay: 0.10s; }
 .timeline-item:nth-child(3) { animation-delay: 0.15s; }
@@ -497,88 +498,98 @@ body {
 .timeline-item:nth-child(9) { animation-delay: 0.45s; }
 .timeline-item:nth-child(10) { animation-delay: 0.50s; }
 
-.timeline-item::before {
-    content: '';
-    position: absolute;
-    left: 1.2rem;
-    top: 1.8rem;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid var(--bg-card);
-    box-shadow: 0 0 0 3px var(--accent);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-}
-.timeline-item:hover::before {
-    transform: scale(1.15);
-    box-shadow: 0 0 0 5px var(--accent-glow);
-}
-
-/* Type-based colours for dots */
-.timeline-item[data-type="Worm"]::before { background: #e74c3c; box-shadow: 0 0 0 3px #e74c3c; }
-.timeline-item[data-type="Virus"]::before { background: #e67e22; box-shadow: 0 0 0 3px #e67e22; }
-.timeline-item[data-type="Ransomware"]::before { background: #c0392b; box-shadow: 0 0 0 3px #c0392b; }
-.timeline-item[data-type="Data Breach"]::before { background: #2980b9; box-shadow: 0 0 0 3px #2980b9; }
-.timeline-item[data-type="DDoS"]::before { background: #8e44ad; box-shadow: 0 0 0 3px #8e44ad; }
-.timeline-item[data-type="Supply Chain"]::before { background: #2c3e50; box-shadow: 0 0 0 3px #2c3e50; }
-.timeline-item[data-type="APT"]::before { background: #16a085; box-shadow: 0 0 0 3px #16a085; }
-.timeline-item[data-type="Other"]::before { background: #7f8c8d; box-shadow: 0 0 0 3px #7f8c8d; }
-
-.timeline-item .year {
-    font-size: 0.75rem;
-    font-weight: 600;
+/* ============================================
+   DATE BADGE (like FIX + AUG10, 2026)
+   ============================================ */
+.timeline-item .badge-date {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
     font-family: var(--font-mono);
-    color: var(--accent);
-    letter-spacing: 0.04em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(74, 140, 247, 0.1);
+    padding: 0.2rem 0.8rem;
+    border-radius: 4px;
+    border: 1px solid rgba(74, 140, 247, 0.15);
+    margin-bottom: 0.5rem;
 }
+
+/* Type-based badge colours (optional – you can keep or remove) */
+.timeline-item[data-type="Worm"] .badge-date { color: #e74c3c; background: rgba(231, 76, 60, 0.1); border-color: rgba(231, 76, 60, 0.15); }
+.timeline-item[data-type="Virus"] .badge-date { color: #e67e22; background: rgba(230, 126, 34, 0.1); border-color: rgba(230, 126, 34, 0.15); }
+.timeline-item[data-type="Ransomware"] .badge-date { color: #c0392b; background: rgba(192, 57, 43, 0.1); border-color: rgba(192, 57, 43, 0.15); }
+.timeline-item[data-type="Data Breach"] .badge-date { color: #2980b9; background: rgba(41, 128, 185, 0.1); border-color: rgba(41, 128, 185, 0.15); }
+.timeline-item[data-type="DDoS"] .badge-date { color: #8e44ad; background: rgba(142, 68, 173, 0.1); border-color: rgba(142, 68, 173, 0.15); }
+.timeline-item[data-type="Supply Chain"] .badge-date { color: #2c3e50; background: rgba(44, 62, 80, 0.1); border-color: rgba(44, 62, 80, 0.15); }
+.timeline-item[data-type="APT"] .badge-date { color: #16a085; background: rgba(22, 160, 133, 0.1); border-color: rgba(22, 160, 133, 0.15); }
+.timeline-item[data-type="Other"] .badge-date { color: #7f8c8d; background: rgba(127, 140, 141, 0.1); border-color: rgba(127, 140, 141, 0.15); }
+
+/* ============================================
+   TITLE (like TIDES UPDATED TO V1.2.7!)
+   ============================================ */
 .timeline-item .title {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-weight: 700;
     letter-spacing: -0.01em;
-    margin: 0.25rem 0 0.3rem 0;
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
 }
-.timeline-item .description {
+
+/* ============================================
+   DESCRIPTION (bullet-point style like Dark Tides)
+   ============================================ */
+.timeline-item .description-list {
+    padding-left: 1.2rem;
+    margin: 0.3rem 0 0.3rem 0;
+}
+
+.timeline-item .description-list li {
     color: var(--text-secondary);
-    font-size: 0.95rem;
-    line-height: 1.7;
-    font-weight: 400;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 0.2rem;
+    list-style-type: disc;
 }
-.timeline-item .badge {
-    display: inline-block;
-    padding: 0.15rem 0.9rem;
-    border-radius: 50px;
-    font-size: 0.65rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    background: rgba(74, 140, 247, 0.1);
-    color: var(--accent);
-    border: 1px solid rgba(74, 140, 247, 0.15);
-    margin-top: 0.5rem;
-}
+
+/* ============================================
+   IMPACT (like the "Impact" line)
+   ============================================ */
 .timeline-item .impact {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
-    font-weight: 400;
-    margin-top: 0.3rem;
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
 }
+
 .timeline-item .impact strong {
     color: var(--text-secondary);
     font-weight: 600;
 }
+
+/* ============================================
+   ICON TYPE (right side)
+   ============================================ */
 .timeline-item .icon-type {
     position: absolute;
     right: 1.2rem;
     top: 1.4rem;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     color: var(--text-muted);
-    opacity: 0.3;
+    opacity: 0.25;
     transition: opacity 0.3s ease;
 }
 .timeline-item:hover .icon-type {
-    opacity: 0.7;
+    opacity: 0.6;
+}
+
+/* ============================================
+   REMOVE OLD DOT CONNECTOR
+   ============================================ */
+.timeline-item::before {
+    display: none;
 }
 
 /* ============================================

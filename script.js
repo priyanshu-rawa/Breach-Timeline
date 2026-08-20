@@ -55,7 +55,7 @@ const totalImpactEl = document.getElementById('totalImpact');
 const chartBars = document.getElementById('chartBars');
 
 // ============================================================
-// RENDER TIMELINE
+// RENDER TIMELINE – Dark Tides Style
 // ============================================================
 function renderTimeline(data) {
     if (data.length === 0) {
@@ -69,30 +69,28 @@ function renderTimeline(data) {
         return;
     }
 
-    timeline.innerHTML = data.map((a, i) => `
-        <div class="timeline-item" data-type="${a.type}" style="animation-delay: ${i * 0.04}s">
-            <div class="year">${a.year}</div>
-            <div class="title">${a.title}</div>
-            <div class="description">${a.description}</div>
-            <span class="badge">${a.type}</span>
-            <div class="impact"><strong>Impact:</strong> ${a.impact}</div>
-            <div class="icon-type"><i class="fas fa-${getIconForType(a.type)}"></i></div>
-        </div>
-    `).join('');
-}
+    timeline.innerHTML = data.map((a, i) => {
+        // Split description into bullet points if it contains multiple sentences
+        const sentences = a.description.split(/\.\s+/).filter(s => s.length > 0);
+        let descriptionHtml = '';
+        if (sentences.length > 1) {
+            descriptionHtml = `<ul class="description-list">
+                ${sentences.map(s => `<li>${s}.</li>`).join('')}
+            </ul>`;
+        } else {
+            descriptionHtml = `<div class="description">${a.description}</div>`;
+        }
 
-function getIconForType(type) {
-    const map = {
-        'Worm': 'bug',
-        'Virus': 'virus',
-        'Ransomware': 'lock',
-        'Data Breach': 'user-secret',
-        'DDoS': 'server',
-        'Supply Chain': 'chain',
-        'APT': 'user-astronaut',
-        'Other': 'exclamation-triangle'
-    };
-    return map[type] || 'circle';
+        return `
+            <div class="timeline-item" data-type="${a.type}" style="animation-delay: ${i * 0.04}s">
+                <div class="badge-date">${a.type} · ${a.year}</div>
+                <div class="title">${a.title}</div>
+                ${descriptionHtml}
+                <div class="impact"><strong>Impact:</strong> ${a.impact}</div>
+                <div class="icon-type"><i class="fas fa-${getIconForType(a.type)}"></i></div>
+            </div>
+        `;
+    }).join('');
 }
 
 // ============================================================
