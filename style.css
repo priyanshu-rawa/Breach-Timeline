@@ -131,11 +131,16 @@ body {
     padding: 0.5rem 0.7rem;
     border-radius: 8px;
     cursor: pointer;
-    transition: background var(--transition), color var(--transition), transform 0.15s ease;
+    transition: background 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .btn-icon:hover {
     background: var(--bg-card);
     color: var(--text-primary);
+    box-shadow: 0 0 0 1px var(--border-color), 0 6px 20px var(--accent-glow);
+    transform: translateY(-2px);
 }
 .btn-icon:active {
     transform: scale(0.92);
@@ -179,6 +184,18 @@ body {
     position: relative;
     z-index: 2;
     max-width: 800px;
+    animation: heroReveal 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes heroReveal {
+    from { opacity: 0; transform: scale(0.96) translateY(16px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-content {
+        animation: none;
+    }
 }
 
 .hero-badge {
@@ -540,9 +557,6 @@ body {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    opacity: 0;
-    transform: translateY(30px);
-    animation: itemReveal 0.6s ease forwards;
     transform-style: preserve-3d;
     perspective: 900px;
     will-change: transform;
@@ -591,22 +605,6 @@ body {
     box-shadow: 0 8px 32px rgba(74, 140, 247, 0.08);
     background: var(--bg-card-hover);
 }
-
-@keyframes itemReveal {
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Staggered animation */
-.timeline-item:nth-child(1) { animation-delay: 0.05s; }
-.timeline-item:nth-child(2) { animation-delay: 0.10s; }
-.timeline-item:nth-child(3) { animation-delay: 0.15s; }
-.timeline-item:nth-child(4) { animation-delay: 0.20s; }
-.timeline-item:nth-child(5) { animation-delay: 0.25s; }
-.timeline-item:nth-child(6) { animation-delay: 0.30s; }
-.timeline-item:nth-child(7) { animation-delay: 0.35s; }
-.timeline-item:nth-child(8) { animation-delay: 0.40s; }
-.timeline-item:nth-child(9) { animation-delay: 0.45s; }
-.timeline-item:nth-child(10) { animation-delay: 0.50s; }
 
 /* ============================================
    DATE BADGE (like FIX + AUG10, 2026)
@@ -715,7 +713,7 @@ body {
 .expand-wrapper {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: grid-template-rows 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .timeline-item.expanded .expand-wrapper {
@@ -733,12 +731,20 @@ body {
     border-top: 1px dashed var(--border-color);
     opacity: 0;
     transform: translateY(-6px);
-    transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.08s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.08s;
 }
 
 .timeline-item.expanded .lessons {
     opacity: 1;
     transform: translateY(0);
+}
+
+.timeline-item.expanded .lessons:not(.story-block) {
+    transition-delay: 0.16s;
+}
+
+.story-block .lessons-heading {
+    color: var(--accent-amber);
 }
 
 .lessons-heading {
@@ -910,12 +916,36 @@ body {
 .reveal {
     opacity: 0;
     transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Alternating slide-in for timeline cards, landing-page style */
+.timeline-item.reveal {
+    transform: translateY(40px) translateX(0);
+    transition-delay: var(--reveal-delay, 0s);
+}
+.timeline-item.reveal:nth-child(odd) {
+    transform: translateY(30px) translateX(-24px);
+}
+.timeline-item.reveal:nth-child(even) {
+    transform: translateY(30px) translateX(24px);
+}
+.timeline-item.reveal.visible {
+    transform: translateY(0) translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal,
+    .timeline-item.reveal:nth-child(odd),
+    .timeline-item.reveal:nth-child(even) {
+        transition: opacity 0.3s ease;
+        transform: none;
+    }
 }
 
 /* ============================================
