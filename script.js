@@ -449,3 +449,56 @@ window.addEventListener('scroll', () => {
 searchInput.placeholder = 'Search attacks... (Ctrl+K)';
 
 console.log('Cyber Attack Timeline loaded – enjoy!');
+
+// ============================================================
+// CARD TILT + SPOTLIGHT + CLICK PULSE (native, rAF-throttled)
+// ============================================================
+(() => {
+    let ticking = false;
+    let activeCard = null;
+    let pointer = { x: 0, y: 0 };
+
+    function applyTilt() {
+        ticking = false;
+        if (!activeCard) return;
+        const rect = activeCard.getBoundingClientRect();
+        const px = (pointer.x - rect.left) / rect.width;
+        const py = (pointer.y - rect.top) / rect.height;
+        const rx = (px - 0.5) * 10;
+        const ry = (py - 0.5) * -10;
+        activeCard.style.setProperty('--rx', `${rx}deg`);
+        activeCard.style.setProperty('--ry', `${ry}deg`);
+        activeCard.style.setProperty('--mx', `${px * 100}%`);
+        activeCard.style.setProperty('--my', `${py * 100}%`);
+    }
+
+    timeline.addEventListener('pointermove', (e) => {
+        const card = e.target.closest('.timeline-item');
+        if (!card) return;
+        activeCard = card;
+        if (!card.classList.contains('tilting')) card.classList.add('tilting');
+        pointer.x = e.clientX;
+        pointer.y = e.clientY;
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(applyTilt);
+        }
+    });
+
+    timeline.addEventListener('pointerleave', (e) => {
+        const card = e.target.closest('.timeline-item');
+        if (!card) return;
+        card.classList.remove('tilting');
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+        if (activeCard === card) activeCard = null;
+    }, true);
+
+    timeline.addEventListener('click', (e) => {
+        const card = e.target.closest('.timeline-item');
+        if (!card) return;
+        card.classList.remove('pulse');
+        void card.offsetWidth; // restart animation
+        card.classList.add('pulse');
+    });
+})();
