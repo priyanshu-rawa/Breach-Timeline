@@ -10,22 +10,25 @@
 }
 
 :root {
-    --bg-primary: #0b0e14;
-    --bg-secondary: #121820;
-    --bg-card: #1a232e;
-    --bg-card-hover: #212d3b;
-    --text-primary: #f0f2f5;
-    --text-secondary: #8b9bb5;
-    --text-muted: #5a6f87;
+    --bg-primary: #0a0f1a;
+    --bg-secondary: #0d1420;
+    --bg-card: #101a26;
+    --bg-card-hover: #142230;
+    --text-primary: #f3f5f8;
+    --text-secondary: #a9b4c2;
+    --text-muted: #6b7889;
     --accent: #4a8cf7;
     --accent-hover: #6aa3ff;
+    --accent-cyan: #38bdf8;
+    --accent-amber: #e8a06a;
     --accent-glow: rgba(74, 140, 247, 0.25);
-    --border-color: #25303e;
+    --border-color: rgba(255, 255, 255, 0.08);
     --shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    --radius: 16px;
+    --radius: 20px;
     --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
+    --font-display: 'Playfair Display', Georgia, serif;
 }
 
 /* Light mode overrides */
@@ -198,6 +201,7 @@ body {
 }
 
 .hero h1 {
+    font-family: var(--font-display);
     font-size: clamp(2.8rem, 8vw, 4.5rem);
     font-weight: 900;
     letter-spacing: -0.03em;
@@ -464,7 +468,7 @@ body {
 
 .timeline-item {
     position: relative;
-    padding: 1.5rem 2rem 1.5rem 2rem;
+    padding: 1.8rem 2rem;
     margin-bottom: 1.5rem;
     border-radius: var(--radius);
     background: var(--bg-card);
@@ -501,39 +505,54 @@ body {
 /* ============================================
    DATE BADGE (like FIX + AUG10, 2026)
    ============================================ */
-.timeline-item .badge-date {
-    display: inline-block;
-    font-size: 0.7rem;
-    font-weight: 700;
-    font-family: var(--font-mono);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--accent);
-    background: rgba(74, 140, 247, 0.1);
-    padding: 0.2rem 0.8rem;
-    border-radius: 4px;
-    border: 1px solid rgba(74, 140, 247, 0.15);
-    margin-bottom: 0.5rem;
+.timeline-item .badge-row {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.9rem;
 }
 
-/* Type-based badge colours (optional – you can keep or remove) */
-.timeline-item[data-type="Worm"] .badge-date { color: #e74c3c; background: rgba(231, 76, 60, 0.1); border-color: rgba(231, 76, 60, 0.15); }
-.timeline-item[data-type="Virus"] .badge-date { color: #e67e22; background: rgba(230, 126, 34, 0.1); border-color: rgba(230, 126, 34, 0.15); }
-.timeline-item[data-type="Ransomware"] .badge-date { color: #c0392b; background: rgba(192, 57, 43, 0.1); border-color: rgba(192, 57, 43, 0.15); }
-.timeline-item[data-type="Data Breach"] .badge-date { color: #2980b9; background: rgba(41, 128, 185, 0.1); border-color: rgba(41, 128, 185, 0.15); }
-.timeline-item[data-type="DDoS"] .badge-date { color: #8e44ad; background: rgba(142, 68, 173, 0.1); border-color: rgba(142, 68, 173, 0.15); }
-.timeline-item[data-type="Supply Chain"] .badge-date { color: #2c3e50; background: rgba(44, 62, 80, 0.1); border-color: rgba(44, 62, 80, 0.15); }
-.timeline-item[data-type="APT"] .badge-date { color: #16a085; background: rgba(22, 160, 133, 0.1); border-color: rgba(22, 160, 133, 0.15); }
-.timeline-item[data-type="Other"] .badge-date { color: #7f8c8d; background: rgba(127, 140, 141, 0.1); border-color: rgba(127, 140, 141, 0.15); }
+.timeline-item .badge-pill {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--accent-amber);
+    background: rgba(232, 160, 106, 0.1);
+    padding: 0.3rem 0.9rem;
+    border-radius: 50px;
+    border: 1px solid rgba(232, 160, 106, 0.18);
+}
+
+.timeline-item .badge-year {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* Type-based pill colours */
+.timeline-item[data-type="Worm"] .badge-pill { color: #f27272; background: rgba(242, 114, 114, 0.1); border-color: rgba(242, 114, 114, 0.18); }
+.timeline-item[data-type="Virus"] .badge-pill { color: #f0a868; background: rgba(240, 168, 104, 0.1); border-color: rgba(240, 168, 104, 0.18); }
+.timeline-item[data-type="Ransomware"] .badge-pill { color: #e77373; background: rgba(231, 115, 115, 0.1); border-color: rgba(231, 115, 115, 0.18); }
+.timeline-item[data-type="Data Breach"] .badge-pill { color: #5aa9e6; background: rgba(90, 169, 230, 0.1); border-color: rgba(90, 169, 230, 0.18); }
+.timeline-item[data-type="DDoS"] .badge-pill { color: #b389e0; background: rgba(179, 137, 224, 0.1); border-color: rgba(179, 137, 224, 0.18); }
+.timeline-item[data-type="Supply Chain"] .badge-pill { color: #8fa3b8; background: rgba(143, 163, 184, 0.1); border-color: rgba(143, 163, 184, 0.18); }
+.timeline-item[data-type="APT"] .badge-pill { color: var(--accent-cyan); background: rgba(56, 189, 248, 0.1); border-color: rgba(56, 189, 248, 0.18); }
+.timeline-item[data-type="Other"] .badge-pill { color: #9aa7b5; background: rgba(154, 167, 181, 0.1); border-color: rgba(154, 167, 181, 0.18); }
 
 /* ============================================
    TITLE (like TIDES UPDATED TO V1.2.7!)
    ============================================ */
 .timeline-item .title {
-    font-size: 1.15rem;
+    font-family: var(--font-display);
+    font-size: 1.55rem;
     font-weight: 700;
     letter-spacing: -0.01em;
-    margin: 0 0 0.5rem 0;
+    line-height: 1.25;
+    margin: 0 0 0.6rem 0;
     color: var(--text-primary);
 }
 
@@ -541,26 +560,39 @@ body {
    DESCRIPTION (bullet-point style like Dark Tides)
    ============================================ */
 .timeline-item .description-list {
-    padding-left: 1.2rem;
-    margin: 0.3rem 0 0.3rem 0;
+    list-style: none;
+    padding-left: 0;
+    margin: 0.4rem 0 0.6rem 0;
 }
 
 .timeline-item .description-list li {
+    position: relative;
     color: var(--text-secondary);
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin-bottom: 0.2rem;
-    list-style-type: disc;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    margin-bottom: 0.35rem;
+    padding-left: 1.3rem;
+}
+
+.timeline-item .description-list li::before {
+    content: '';
+    position: absolute;
+    left: 0.15rem;
+    top: 0.65rem;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-cyan);
 }
 
 /* ============================================
    IMPACT (like the "Impact" line)
    ============================================ */
 .timeline-item .impact {
-    font-size: 0.8rem;
+    font-size: 0.82rem;
     color: var(--text-muted);
-    margin-top: 0.5rem;
-    padding-top: 0.5rem;
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
     border-top: 1px solid var(--border-color);
 }
 

@@ -104,7 +104,10 @@ function renderTimeline(data) {
 
             return `
                 <div class="timeline-item" data-type="${a.type || 'Other'}" style="animation-delay: ${i * 0.04}s">
-                    <div class="badge-date">${a.type || 'Unknown'} · ${a.year || 'N/A'}</div>
+                    <div class="badge-row">
+                        <span class="badge-pill">${a.type || 'Unknown'}</span>
+                        <span class="badge-year">${a.year || 'N/A'}</span>
+                    </div>
                     <div class="title">${a.title || 'Untitled'}</div>
                     ${descriptionHtml}
                     <div class="impact"><strong>Impact:</strong> ${a.impact || 'Unknown'}</div>
