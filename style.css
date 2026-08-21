@@ -767,9 +767,9 @@ body {
 }
 
 /* ============================================
-   PARTICLE BACKGROUND CANVAS
+   AURORA BACKGROUND (buttery smooth, CSS-only, GPU-composited)
    ============================================ */
-#particle-canvas {
+.aurora-bg {
     position: fixed;
     top: 0;
     left: 0;
@@ -777,10 +777,66 @@ body {
     height: 100vh;
     z-index: 0;
     pointer-events: none;
+    overflow: hidden;
     opacity: 0.8;
 }
-.light-mode #particle-canvas {
-    opacity: 0.4;
+
+.aurora-bg span {
+    position: absolute;
+    width: 55vw;
+    height: 55vw;
+    border-radius: 50%;
+    filter: blur(90px);
+    will-change: transform;
+    mix-blend-mode: screen;
+}
+
+.aurora-bg span:nth-child(1) {
+    top: -15%;
+    left: -10%;
+    background: radial-gradient(circle, rgba(74, 140, 247, 0.35), transparent 70%);
+    animation: auroraDrift1 26s ease-in-out infinite;
+}
+
+.aurora-bg span:nth-child(2) {
+    top: 20%;
+    right: -15%;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.28), transparent 70%);
+    animation: auroraDrift2 32s ease-in-out infinite;
+}
+
+.aurora-bg span:nth-child(3) {
+    bottom: -20%;
+    left: 20%;
+    width: 45vw;
+    height: 45vw;
+    background: radial-gradient(circle, rgba(232, 160, 106, 0.16), transparent 70%);
+    animation: auroraDrift3 38s ease-in-out infinite;
+}
+
+@keyframes auroraDrift1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(8vw, 6vh) scale(1.12); }
+}
+
+@keyframes auroraDrift2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-7vw, 9vh) scale(1.08); }
+}
+
+@keyframes auroraDrift3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(6vw, -8vh) scale(1.15); }
+}
+
+.light-mode .aurora-bg {
+    opacity: 0.35;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .aurora-bg span {
+        animation: none;
+    }
 }
 
 /* ============================================
