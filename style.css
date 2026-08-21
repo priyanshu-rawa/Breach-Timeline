@@ -380,6 +380,72 @@ body {
 }
 
 /* ============================================
+   HOVER TOOLTIPS (pure CSS, zero JS overhead)
+   Add data-tooltip="..." to any element to enable
+   ============================================ */
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    white-space: nowrap;
+    background: var(--bg-card);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.45rem 0.8rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 50;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+[data-tooltip]::before {
+    content: '';
+    position: absolute;
+    top: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-6px);
+    border: 5px solid transparent;
+    border-bottom-color: var(--bg-card);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 51;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip]:hover::before,
+[data-tooltip]:focus-visible::after,
+[data-tooltip]:focus-visible::before {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+@media (max-width: 640px) {
+    [data-tooltip]::after,
+    [data-tooltip]::before {
+        display: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-tooltip]::after,
+    [data-tooltip]::before {
+        transition: opacity 0.1s ease;
+    }
+}
+
+/* ============================================
    STATS CHART
    ============================================ */
 .stats-chart {
@@ -639,6 +705,92 @@ body {
 .timeline-item .impact strong {
     color: var(--text-secondary);
     font-weight: 600;
+}
+
+/* ============================================
+   CLICK-TO-EXPAND: SECURITY LESSONS
+   (grid-rows trick = smooth height animation
+   with zero JS measuring, fully independent per card)
+   ============================================ */
+.expand-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item.expanded .expand-wrapper {
+    grid-template-rows: 1fr;
+}
+
+.expand-inner {
+    overflow: hidden;
+    min-height: 0;
+}
+
+.lessons {
+    margin-top: 0.9rem;
+    padding-top: 0.9rem;
+    border-top: 1px dashed var(--border-color);
+    opacity: 0;
+    transform: translateY(-6px);
+    transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+}
+
+.timeline-item.expanded .lessons {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.lessons-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-cyan);
+    margin-bottom: 0.5rem;
+}
+
+.lessons p {
+    font-size: 0.92rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.expand-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.9rem;
+    padding: 0;
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.expand-toggle i {
+    font-size: 0.7rem;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item.expanded .expand-toggle i {
+    transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .expand-wrapper,
+    .lessons,
+    .expand-toggle i {
+        transition: none;
+    }
 }
 
 /* ============================================
