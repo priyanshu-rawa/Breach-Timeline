@@ -1392,6 +1392,95 @@ body {
 }
 
 /* ============================================
+   ABOUT SECTION – PREMIUM MOTION LAYER
+   (purely decorative, text content untouched)
+   ============================================ */
+.about-container-premium {
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    isolation: isolate;
+}
+
+.about-glow-border {
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    border-radius: calc(var(--radius) + 2px);
+    background: conic-gradient(from 0deg, var(--accent), var(--accent-cyan), var(--accent-amber), var(--accent), var(--accent-cyan));
+    animation: aboutBorderSpin 7s linear infinite;
+    opacity: 0.55;
+}
+
+@keyframes aboutBorderSpin {
+    to { transform: rotate(360deg); }
+}
+
+.about-quote-icon {
+    position: absolute;
+    top: 1.6rem;
+    right: 2rem;
+    font-size: 3.5rem;
+    color: var(--accent);
+    opacity: 0.08;
+    z-index: 0;
+    animation: aboutQuoteFloat 5s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes aboutQuoteFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-8px) rotate(-4deg); }
+}
+
+.about-container-premium::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(360px circle at var(--about-mx, 50%) var(--about-my, 30%), rgba(74, 140, 247, 0.14), transparent 70%);
+    transition: opacity 0.4s ease;
+}
+.about-container-premium:hover::after {
+    opacity: 1;
+}
+
+.about-container-premium .about-badge,
+.about-container-premium .about-title,
+.about-container-premium .about-text {
+    position: relative;
+    z-index: 1;
+}
+
+.about-live-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-cyan);
+    margin-right: 0.5rem;
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6);
+    animation: aboutLivePulse 2s ease-out infinite;
+    vertical-align: middle;
+}
+
+@keyframes aboutLivePulse {
+    0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6); }
+    70% { box-shadow: 0 0 0 8px rgba(56, 189, 248, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .about-glow-border,
+    .about-quote-icon,
+    .about-live-dot {
+        animation: none;
+    }
+}
+
+/* ============================================
    TIPS SECTION
    ============================================ */
 .tips-section {

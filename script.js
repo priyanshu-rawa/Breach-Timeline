@@ -695,8 +695,30 @@ console.log('Cyber Attack Timeline loaded – enjoy!');
 })();
 
 // ============================================================
-// BACK TO TOP
+// ABOUT SECTION – CURSOR SPOTLIGHT (decorative only)
 // ============================================================
+(() => {
+    const container = document.getElementById('aboutContainer');
+    if (!container || prefersReducedMotion) return;
+    let ticking = false;
+    let pointer = { x: 0, y: 0 };
+
+    function apply() {
+        ticking = false;
+        const rect = container.getBoundingClientRect();
+        container.style.setProperty('--about-mx', `${((pointer.x - rect.left) / rect.width) * 100}%`);
+        container.style.setProperty('--about-my', `${((pointer.y - rect.top) / rect.height) * 100}%`);
+    }
+
+    container.addEventListener('pointermove', (e) => {
+        pointer.x = e.clientX;
+        pointer.y = e.clientY;
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(apply);
+        }
+    });
+})();
 const backToTopBtn = document.getElementById('backToTop');
 if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
