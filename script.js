@@ -143,10 +143,6 @@ function renderTimeline(data) {
                                 <div class="lessons-heading"><i class="fas fa-book-open"></i> The story: why, how &amp; what happened</div>
                                 <p>${a.story || ''}</p>
                             </div>
-                            <div class="lessons">
-                                <div class="lessons-heading"><i class="fas fa-shield-halved"></i> How to stay protected</div>
-                                <p>${a.lessons || ''}</p>
-                            </div>
                         </div>
                     </div>
                     <button class="expand-toggle" type="button" aria-expanded="false">
@@ -465,9 +461,14 @@ console.log('Cyber Attack Timeline loaded – enjoy!');
         const toggleBtn = e.target.closest('.expand-toggle');
         const isExpanded = card.classList.contains('expanded');
         if (toggleBtn || !e.target.closest('a, button:not(.expand-toggle)')) {
-            card.classList.toggle('expanded', !isExpanded);
+            const willExpand = !isExpanded;
+            card.classList.toggle('expanded', willExpand);
             const btn = card.querySelector('.expand-toggle');
-            if (btn) btn.setAttribute('aria-expanded', String(!isExpanded));
+            if (btn) {
+                btn.setAttribute('aria-expanded', String(willExpand));
+                const label = btn.querySelector('span');
+                if (label) label.textContent = willExpand ? 'Read less' : 'Read more';
+            }
         }
     });
 })();
