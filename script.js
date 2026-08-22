@@ -73,6 +73,15 @@ const attacks = [
     { year: 2026, title: 'Foxconn Ransomware Breach', description: 'The Nitrogen ransomware group claimed to have stolen 8 terabytes of data from Foxconn\'s North American factories, including schematics and project files tied to major clients like Apple, Dell, Google, and Nvidia.', story: 'The ransomware group claims to have breached Foxconn\'s North American factory networks and stolen terabytes of manufacturing data tied to major clients rather than just Foxconn\'s own information. Because contract manufacturers like Foxconn build products for many different tech companies at once, a single breach risks exposing confidential designs from several unrelated brands simultaneously. The incident is still unfolding, but it highlights how supply-chain manufacturers have become high-value targets precisely because of who they build for.', type: 'Ransomware', impact: '8TB of sensitive data claimed stolen, major client exposure risk', lessons: 'Because Foxconn manufactures for so many large tech brands, one breach threatened to expose confidential designs from several companies at once. Strict data segregation between different clients\' projects, and requiring contract manufacturers to meet the same security bar as the brands they serve, limits this kind of blast radius.' }
 ];
 
+const faqs = [
+    { q: 'Is this timeline complete? Are you missing an attack?', a: 'It covers 32 of the most significant attacks from 1988 to 2026, chosen for historical importance and variety of type, not an exhaustive list of every breach ever recorded. If there\'s a major attack you think belongs here, feel free to reach out via GitHub.' },
+    { q: 'Where does the information on this site come from?', a: 'Every entry is written from publicly reported facts about each incident, then summarized and explained in my own words. Nothing here is copied directly from any article or report.' },
+    { q: 'Is my data collected when I use this site?', a: 'No. This site has no backend, no analytics, and no account system. Everything runs entirely in your browser, and your search, filters, and dark mode preference stay on your own device.' },
+    { q: 'Why do some attacks list a dollar impact and others don\'t?', a: 'Not every attack has a reliably estimated financial cost. Where a credible figure exists, it\'s shown; where it doesn\'t, the impact focuses on scale instead, like number of records or systems affected.' },
+    { q: 'I run a small business — is any of this actually relevant to me?', a: 'Very much so. Several attacks on this timeline, like Baltimore City and Colonial Pipeline, started with something as small as one reused password or one unpatched server. Scale doesn\'t protect you; basic habits do.' },
+    { q: 'What\'s the single most important thing I can do today?', a: 'If you do only one thing, turn on multi-factor authentication for your email account. Email is usually the recovery method for every other account you own, so protecting it protects almost everything else by extension.' }
+];
+
 // ============================================================
 // DOM REFERENCES
 // ============================================================
@@ -206,6 +215,42 @@ function updateStats(data) {
     };
     const total = data.reduce((sum, a) => sum + (impactMap[a.type] || 1), 0);
     totalImpactEl.textContent = `$${(total * 0.5).toFixed(1)}B+`;
+}
+
+// ============================================================
+// FAQ ACCORDION
+// ============================================================
+function renderFAQ() {
+    const faqList = document.getElementById('faqList');
+    if (!faqList) return;
+
+    faqList.innerHTML = faqs.map((item, i) => `
+        <div class="faq-item reveal" style="--reveal-delay: ${Math.min(i * 0.06, 0.3)}s">
+            <button class="faq-question" type="button" aria-expanded="false">
+                <span>${item.q}</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="expand-wrapper">
+                <div class="expand-inner">
+                    <p class="faq-answer">${item.a}</p>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    faqList.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.faq-item');
+            const willOpen = !item.classList.contains('open');
+            item.classList.toggle('open', willOpen);
+            btn.setAttribute('aria-expanded', String(willOpen));
+        });
+    });
+
+    faqList.querySelectorAll('.faq-item').forEach(el => {
+        el.classList.add('reveal');
+        if (revealObserver) revealObserver.observe(el);
+    });
 }
 
 // ============================================================
@@ -414,7 +459,7 @@ document.addEventListener('mousemove', (e) => {
 // ============================================================
 // SCROLL REVEAL
 // ============================================================
-const revealElements = document.querySelectorAll('.timeline-item, .stat-item, .chart-container');
+const revealElements = document.querySelectorAll('.timeline-item, .stat-item, .chart-container, .about-section, .tips-section, .protect-section, .faq-section, .tip-card, .protect-card');
 const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -430,6 +475,8 @@ revealElements.forEach(el => {
     el.classList.add('reveal');
     revealObserver.observe(el);
 });
+
+renderFAQ();
 
 // ============================================================
 // SMOOTH SCROLL INDICATOR – Hide after first scroll
