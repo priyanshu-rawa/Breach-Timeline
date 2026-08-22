@@ -178,13 +178,7 @@
             <div class="about-badge">ABOUT THIS PROJECT</div>
             <h2 class="about-title">Why I built this</h2>
             <p class="about-text">
-                I'm not a security professional with a certification wall behind me. I'm self-taught, learning cybersecurity the way most people actually do in 2026: late at night, one write-up at a time, jumping between a breach report, a YouTube explainer, and a forum thread trying to figure out how something like WannaCry could take down hospitals in a single weekend. Somewhere along the way I noticed the same problem over and over — the history of this field is genuinely fascinating, but it's scattered across a thousand different sources, and almost none of it is written for someone who's just getting curious.
-            </p>
-            <p class="about-text" style="margin-top: 1rem;">
-                So I built the timeline I wish I'd had when I started. Not to make anyone an expert overnight, but to make the last four decades of hacking history something you can actually sit down and explore — and walk away from a little more aware of how these things really happen. Because here's the part that doesn't get said enough: this isn't just a topic for IT departments and big companies anymore. In 2026, the same tricks used against banks and hospitals — a fake password reset call, a reused password, an unpatched app — work just as well against a regular person's phone or laptop. Understanding how the big attacks unfolded is honestly one of the best ways to understand how the small, personal ones happen too.
-            </p>
-            <p class="about-text" style="margin-top: 1rem;">
-                If you're a newbie like I was, my hope is this site gives you a way in that isn't intimidating. If you already know your way around this stuff, I hope the "why it happened" angle on each entry adds something a plain Wikipedia summary doesn't. Either way, thanks for stopping by — I'm still learning this alongside you.
+                I'm self-taught in cybersecurity, learning it the way most of us actually do in 2026 — one breach write-up, one CVE, one late-night rabbit hole at a time — and I built this timeline because I wanted a single place to actually explore how these attacks unfolded instead of another wall of text. The deeper reason is simple: studying something like the Morris Worm or WannaCry teaches you the exact same patterns — phishing, unpatched software, weak MFA — that show up in attacks on regular people every day, not just banks and hospitals. So if you're new to this, welcome in; and if you already know your stuff, I hope the "why it happened" behind each entry adds something a plain summary doesn't.
             </p>
         </div>
     </section>
@@ -297,24 +291,38 @@
 
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
+        <div class="footer-glow"></div>
 
         <div class="footer-content">
 
-            <p>
-                Built with
-                <i class="fas fa-heart" style="color: #e74c3c;"></i>
-                by
-                <a href="https://github.com/priyanshu-rawa" target="_blank">
-                    Priyanshu Rawat
-                </a>
-            </p>
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="logo-mark"><i class="fas fa-shield-halved"></i></span>
+                        <span class="logo-text">Cyber<span class="logo-accent">Timeline</span></span>
+                    </div>
+                    <p class="footer-tagline">A self-taught deep dive into the attacks that shaped digital security — built to make cybersecurity history a little less intimidating.</p>
+                </div>
 
-            <p>
-                Data sourced from public cybersecurity archives ·
-                <a href="https://github.com/priyanshu-rawa/breach-timeline" target="_blank">
-                    View on GitHub
-                </a>
-            </p>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <a href="#timeline">The Timeline</a>
+                    <a href="#statsChart">Attack Stats</a>
+                    <a href="#faqList">FAQ</a>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="https://github.com/priyanshu-rawa" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub Profile</a>
+                    <a href="https://github.com/priyanshu-rawa/breach-timeline" target="_blank" rel="noopener"><i class="fas fa-code-branch"></i> Source Code</a>
+                    <button type="button" class="footer-top-btn" id="backToTop"><i class="fas fa-arrow-up"></i> Back to top</button>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>Built with <i class="fas fa-heart footer-heart"></i> by <a href="https://github.com/priyanshu-rawa" target="_blank">Priyanshu Rawat</a></p>
+                <p>Data sourced from public cybersecurity archives</p>
+            </div>
 
         </div>
 

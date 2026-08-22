@@ -693,3 +693,17 @@ console.log('Cyber Attack Timeline loaded – enjoy!');
         }
     });
 })();
+
+// ============================================================
+// BACK TO TOP
+// ============================================================
+const backToTopBtn = document.getElementById('backToTop');
+if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
+        if (lenisInstance) {
+            lenisInstance.scrollTo(0, { duration: 1.4 });
+        } else {
+            window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        }
+    });
+}
