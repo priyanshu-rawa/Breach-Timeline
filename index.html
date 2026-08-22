@@ -51,7 +51,7 @@
         <div class="hero-content">
 
             <div class="hero-badge">
-                <i class="fas fa-bolt"></i> Interactive History
+                <i class="fas fa-bolt"></i> The History of Cybercrime
             </div>
 
             <h1>Cyber Attack Timeline</h1>
@@ -101,13 +101,12 @@
 
             <div class="filter-group">
                 <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Search attacks..." />
+                <input type="text" id="searchInput" placeholder="Search attacks... (Ctrl+K)" />
             </div>
 
-            <div class="filter-group">
+            <div class="filter-group custom-select-group">
                 <i class="fas fa-calendar"></i>
-
-                <select id="decadeFilter">
+                <select id="decadeFilter" class="sr-only-select" tabindex="-1" aria-hidden="true">
                     <option value="all">All Decades</option>
                     <option value="1980">1980s</option>
                     <option value="1990">1990s</option>
@@ -115,12 +114,18 @@
                     <option value="2010">2010s</option>
                     <option value="2020">2020s</option>
                 </select>
+                <div class="custom-select" id="decadeCustom">
+                    <button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="custom-select-value">All Decades</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="custom-select-panel" role="listbox"></ul>
+                </div>
             </div>
 
-            <div class="filter-group">
+            <div class="filter-group custom-select-group">
                 <i class="fas fa-tag"></i>
-
-                <select id="typeFilter">
+                <select id="typeFilter" class="sr-only-select" tabindex="-1" aria-hidden="true">
                     <option value="all">All Types</option>
                     <option value="Worm">Worm</option>
                     <option value="Virus">Virus</option>
@@ -131,6 +136,13 @@
                     <option value="APT">APT</option>
                     <option value="Other">Other</option>
                 </select>
+                <div class="custom-select" id="typeCustom">
+                    <button type="button" class="custom-select-trigger" aria-haspopup="listbox" aria-expanded="false">
+                        <span class="custom-select-value">All Types</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <ul class="custom-select-panel" role="listbox"></ul>
+                </div>
             </div>
 
             <button class="btn-clear" id="clearFilters" data-tooltip="Reset search and filters">
@@ -181,12 +193,28 @@
                 <div class="tip-card">
                     <div class="tip-icon"><i class="fas fa-key"></i></div>
                     <h3>Use a password manager</h3>
-                    <p>Long, unique passwords for every account beat memorized ones every time. A single reused password is how most account breaches start.</p>
+                    <p>Long, unique passwords for every account beat memorized ones every time. A single reused password is how most account breaches start. <a href="https://www.privacyguides.org/en/passwords/" target="_blank" rel="noopener">See recommended password managers →</a></p>
                 </div>
                 <div class="tip-card">
                     <div class="tip-icon"><i class="fas fa-lock"></i></div>
                     <h3>Turn on multi-factor authentication</h3>
-                    <p>MFA is the single biggest thing you can do to stop a stolen password from becoming a compromised account. Enable it everywhere it's offered.</p>
+                    <p>MFA is the single biggest thing you can do to stop a stolen password from becoming a compromised account. App-based authenticators are safer than SMS codes. <a href="https://www.privacyguides.org/en/multi-factor-authentication/" target="_blank" rel="noopener">See recommended MFA apps →</a></p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon"><i class="fas fa-envelope"></i></div>
+                    <h3>Pick an email client that respects you</h3>
+                    <p>Your inbox is the recovery key to almost every other account you own, so it's worth using a client that isn't mining it for ad data. <a href="https://www.privacyguides.org/en/email-clients/" target="_blank" rel="noopener">See recommended email clients →</a></p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon"><i class="fas fa-user-shield"></i></div>
+                    <h3>Use a trustworthy VPN, if you need one</h3>
+                    <p>A VPN shifts trust from your network to the VPN provider — it's not automatically "more private," so the provider you pick actually matters. <a href="https://www.privacyguides.org/en/vpn/" target="_blank" rel="noopener">See recommended VPN providers →</a></p>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-icon"><i class="fas fa-compass"></i></div>
+                    <h3>Switch to a privacy-respecting browser</h3>
+                    <p>Your browser sees everything: every site, every search, every login. The default browser on your OS is rarely built with blocking trackers or fingerprinting in mind, so it's worth switching to one that is, and pairing it with a solid ad/tracker blocker.</p>
+                    <p><a href="https://www.privacyguides.org/en/desktop-browsers/" target="_blank" rel="noopener">Desktop browsers →</a> &nbsp;·&nbsp; <a href="https://www.privacyguides.org/en/mobile-browsers/" target="_blank" rel="noopener">Mobile browsers →</a></p>
                 </div>
                 <div class="tip-card">
                     <div class="tip-icon"><i class="fas fa-arrows-rotate"></i></div>
@@ -216,41 +244,35 @@
     <!-- ===== PROTECT YOUR DEVICES ===== -->
     <section class="protect-section reveal" aria-label="Device protection resources">
         <div class="protect-container">
-            <div class="about-badge">OFFICIAL RESOURCES</div>
+            <div class="about-badge">SOURCE: PRIVACY GUIDES</div>
             <h2 class="about-title">Protect your own devices</h2>
             <p class="about-text protect-intro">
-                These are the actual official guides from each platform maker, not a random blog. Worth bookmarking.
+                These guides come from <a href="https://www.privacyguides.org/en/basics/why-privacy-matters/" target="_blank" rel="noopener">Privacy Guides</a>, a non-profit, ad-free, volunteer-run resource with no affiliate links or sponsorships — just OS-by-OS instructions for locking down your device.
             </p>
             <div class="protect-grid">
-                <a class="protect-card" href="https://www.microsoft.com/en-us/windows/comprehensive-security" target="_blank" rel="noopener">
+                <a class="protect-card" href="https://www.privacyguides.org/en/os/windows/" target="_blank" rel="noopener">
                     <div class="protect-icon"><i class="fab fa-windows"></i></div>
-                    <h3>Windows PC</h3>
-                    <p>Microsoft's official guide to Windows Security features, Defender, and account protection.</p>
-                    <span class="protect-link">microsoft.com <i class="fas fa-arrow-up-right-from-square"></i></span>
+                    <h3>Windows</h3>
+                    <p>Privacy Guides' Windows hardening guide, including their recommended Group Policy settings.</p>
+                    <span class="protect-link">privacyguides.org <i class="fas fa-arrow-up-right-from-square"></i></span>
                 </a>
-                <a class="protect-card" href="https://support.apple.com/guide/mac-help/keep-your-mac-secure-mchl2a1b1b19/mac" target="_blank" rel="noopener">
+                <a class="protect-card" href="https://www.privacyguides.org/en/os/macos-overview/" target="_blank" rel="noopener">
                     <div class="protect-icon"><i class="fab fa-apple"></i></div>
-                    <h3>Mac</h3>
-                    <p>Apple's official Mac User Guide chapter on keeping your Mac secure, from Gatekeeper to FileVault.</p>
-                    <span class="protect-link">support.apple.com <i class="fas fa-arrow-up-right-from-square"></i></span>
+                    <h3>macOS</h3>
+                    <p>Privacy Guides' overview of macOS's built-in privacy and security controls and how to configure them.</p>
+                    <span class="protect-link">privacyguides.org <i class="fas fa-arrow-up-right-from-square"></i></span>
                 </a>
-                <a class="protect-card" href="https://support.apple.com/en-us/guide/personal-safety/welcome/web" target="_blank" rel="noopener">
+                <a class="protect-card" href="https://www.privacyguides.org/en/os/ios-overview/" target="_blank" rel="noopener">
                     <div class="protect-icon"><i class="fas fa-mobile-screen-button"></i></div>
-                    <h3>iPhone &amp; iPad</h3>
-                    <p>Apple's Personal Safety User Guide covering device passcodes, two-factor authentication, and app privacy.</p>
-                    <span class="protect-link">support.apple.com <i class="fas fa-arrow-up-right-from-square"></i></span>
+                    <h3>iOS</h3>
+                    <p>Privacy Guides' iOS overview covering device encryption, app tracking permissions, and Lockdown Mode.</p>
+                    <span class="protect-link">privacyguides.org <i class="fas fa-arrow-up-right-from-square"></i></span>
                 </a>
-                <a class="protect-card" href="https://safety.google/security/" target="_blank" rel="noopener">
+                <a class="protect-card" href="https://www.privacyguides.org/en/os/android-overview/" target="_blank" rel="noopener">
                     <div class="protect-icon"><i class="fab fa-android"></i></div>
                     <h3>Android</h3>
-                    <p>Google's official Safety Center overview of the built-in security features protecting Android devices.</p>
-                    <span class="protect-link">safety.google <i class="fas fa-arrow-up-right-from-square"></i></span>
-                </a>
-                <a class="protect-card" href="https://www.cisa.gov/secure-our-world" target="_blank" rel="noopener">
-                    <div class="protect-icon"><i class="fas fa-landmark-dome"></i></div>
-                    <h3>General &amp; Family Safety</h3>
-                    <p>CISA's "Secure Our World" campaign — plain-English core habits for staying safe online, for any device.</p>
-                    <span class="protect-link">cisa.gov <i class="fas fa-arrow-up-right-from-square"></i></span>
+                    <p>Privacy Guides' Android overview, including hardened distributions and general security recommendations.</p>
+                    <span class="protect-link">privacyguides.org <i class="fas fa-arrow-up-right-from-square"></i></span>
                 </a>
             </div>
         </div>

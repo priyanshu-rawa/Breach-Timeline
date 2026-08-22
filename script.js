@@ -93,6 +93,76 @@ const clearBtn = document.getElementById('clearFilters');
 const randomBtn = document.getElementById('randomBtn');
 const shareBtn = document.getElementById('shareBtn');
 const darkToggle = document.getElementById('darkToggle');
+
+// ============================================================
+// CUSTOM ANIMATED DROPDOWNS (Decade / Type)
+// Syncs with the hidden native <select> so existing filter
+// logic (decadeFilter.value / 'change' listeners) keeps working.
+// ============================================================
+function initCustomSelect(customId, selectEl) {
+    const root = document.getElementById(customId);
+    if (!root || !selectEl) return;
+    const trigger = root.querySelector('.custom-select-trigger');
+    const valueEl = trigger.querySelector('.custom-select-value');
+    const panel = root.querySelector('.custom-select-panel');
+
+    panel.innerHTML = Array.from(selectEl.options).map(opt => `
+        <li class="custom-select-option${opt.selected ? ' selected' : ''}" role="option" data-value="${opt.value}" aria-selected="${opt.selected}">
+            <span>${opt.textContent}</span>
+            <i class="fas fa-check check-icon"></i>
+        </li>
+    `).join('');
+
+    function close() {
+        root.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+    }
+    function open() {
+        document.querySelectorAll('.custom-select.open').forEach(el => { if (el !== root) el.classList.remove('open'); });
+        root.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+    }
+
+    trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        root.classList.contains('open') ? close() : open();
+    });
+
+    panel.addEventListener('click', (e) => {
+        const opt = e.target.closest('.custom-select-option');
+        if (!opt) return;
+        selectEl.value = opt.dataset.value;
+        selectEl.dispatchEvent(new Event('change'));
+        valueEl.textContent = opt.querySelector('span').textContent;
+        panel.querySelectorAll('.custom-select-option').forEach(o => {
+            const isSel = o === opt;
+            o.classList.toggle('selected', isSel);
+            o.setAttribute('aria-selected', String(isSel));
+        });
+        close();
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!root.contains(e.target)) close();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && root.classList.contains('open')) close();
+    });
+
+    // Keep custom label in sync if the select's value changes elsewhere (e.g. Clear button)
+    selectEl.addEventListener('change', () => {
+        const match = Array.from(selectEl.options).find(o => o.value === selectEl.value);
+        if (match) valueEl.textContent = match.textContent;
+        panel.querySelectorAll('.custom-select-option').forEach(o => {
+            const isSel = o.dataset.value === selectEl.value;
+            o.classList.toggle('selected', isSel);
+            o.setAttribute('aria-selected', String(isSel));
+        });
+    });
+}
+
+initCustomSelect('decadeCustom', decadeFilter);
+initCustomSelect('typeCustom', typeFilter);
 const totalAttacksEl = document.getElementById('totalAttacks');
 const totalDecadesEl = document.getElementById('totalDecades');
 const totalImpactEl = document.getElementById('totalImpact');
@@ -406,6 +476,46 @@ const debouncedFilter = () => {
 };
 
 searchInput.addEventListener('input', debouncedFilter);
+
+// ============================================================
+// ANIMATED SEARCH PLACEHOLDER (typewriter, left-to-right)
+// ============================================================
+(() => {
+    if (prefersReducedMotion) {
+        searchInput.placeholder = 'Search attacks... (Ctrl+K)';
+        return;
+    }
+    const phrases = ['Search attacks...', 'Try "ransomware"', 'Try "WannaCry"', 'Try "Stuxnet"', 'Try "2021"', 'Try "data breach"'];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function tick() {
+        if (document.activeElement === searchInput) {
+            setTimeout(tick, 400);
+            return;
+        }
+        const current = phrases[phraseIndex];
+        if (!deleting) {
+            charIndex++;
+            searchInput.placeholder = current.slice(0, charIndex);
+            if (charIndex === current.length) {
+                deleting = true;
+                setTimeout(tick, 1500);
+                return;
+            }
+        } else {
+            charIndex--;
+            searchInput.placeholder = current.slice(0, charIndex);
+            if (charIndex === 0) {
+                deleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+            }
+        }
+        setTimeout(tick, deleting ? 35 : 55);
+    }
+    tick();
+})();
 decadeFilter.addEventListener('change', filterAttacks);
 typeFilter.addEventListener('change', filterAttacks);
 
