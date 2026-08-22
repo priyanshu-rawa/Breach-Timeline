@@ -1,21 +1,30 @@
 // ============================================================
-// LENIS SMOOTH SCROLL
+// LENIS SMOOTH SCROLL + GSAP SYNC
 // ============================================================
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let lenisInstance = null;
+
 (() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (typeof Lenis === 'undefined' || prefersReducedMotion) return;
 
-    const lenis = new Lenis({
+    lenisInstance = new Lenis({
         duration: 1.2,
         easing: (t) => 1 - Math.pow(1 - t, 3),
         smoothWheel: true,
     });
 
-    function raf(time) {
-        lenis.raf(time);
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+        lenisInstance.on('scroll', ScrollTrigger.update);
+        gsap.ticker.add((time) => lenisInstance.raf(time * 1000));
+        gsap.ticker.lagSmoothing(0);
+    } else {
+        function raf(time) {
+            lenisInstance.raf(time);
+            requestAnimationFrame(raf);
+        }
         requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
 })();
 
 // ============================================================
@@ -200,7 +209,7 @@ function updateStats(data) {
 }
 
 // ============================================================
-// CHART – Attacks by Decade
+// CHART – Attacks by Decade (GSAP-powered, premium motion)
 // ============================================================
 function updateChart(data) {
     const decades = [1980, 1990, 2000, 2010, 2020];
@@ -210,13 +219,66 @@ function updateChart(data) {
     chartBars.innerHTML = decades.map((d, i) => {
         const height = (counts[i] / maxCount) * 100;
         return `
-            <div class="bar-wrapper">
-                <span class="bar-count">${counts[i]}</span>
-                <div class="bar" style="height: ${Math.max(height, 4)}%;"></div>
+            <div class="bar-wrapper" data-tooltip="${counts[i]} attack${counts[i] === 1 ? '' : 's'} recorded in the ${d}s">
+                <span class="bar-count" data-target="${counts[i]}">0</span>
+                <div class="bar" data-height="${Math.max(height, 4)}" style="height: 0%;"></div>
                 <span class="bar-label">${d}s</span>
             </div>
         `;
     }).join('');
+
+    animateChart();
+}
+
+let chartRevealedOnce = false;
+
+function animateChart() {
+    const wrappers = chartBars.querySelectorAll('.bar-wrapper');
+    if (!wrappers.length) return;
+
+    if (prefersReducedMotion || typeof gsap === 'undefined') {
+        wrappers.forEach(w => {
+            const bar = w.querySelector('.bar');
+            const countEl = w.querySelector('.bar-count');
+            bar.style.height = `${bar.dataset.height}%`;
+            countEl.textContent = countEl.dataset.target;
+        });
+        return;
+    }
+
+    const run = () => {
+        wrappers.forEach((w, i) => {
+            const bar = w.querySelector('.bar');
+            const countEl = w.querySelector('.bar-count');
+            const target = parseInt(countEl.dataset.target, 10);
+            const counter = { val: 0 };
+
+            gsap.timeline({ delay: i * 0.1 })
+                .to(bar, {
+                    height: `${bar.dataset.height}%`,
+                    duration: 1.1,
+                    ease: 'elastic.out(1, 0.65)',
+                }, 0)
+                .to(counter, {
+                    val: target,
+                    duration: 0.9,
+                    ease: 'power2.out',
+                    onUpdate: () => { countEl.textContent = Math.round(counter.val); },
+                }, 0);
+        });
+    };
+
+    if (chartRevealedOnce || typeof ScrollTrigger === 'undefined') {
+        run();
+        return;
+    }
+
+    ScrollTrigger.create({
+        trigger: '#statsChart',
+        start: 'top 80%',
+        once: true,
+        onEnter: () => { chartRevealedOnce = true; run(); },
+    });
 }
 
 // ============================================================
