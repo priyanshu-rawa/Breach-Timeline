@@ -35,7 +35,7 @@
 
 ## Live Demo
 
-**[Open Breach Timeline →](https://priyanshu-rawa.github.io/Breach-Timeline)**
+**[Open Breach Timeline →](https://breach-timeline-kappa.vercel.app/)**
 
 There's nothing to install, no sign-up, and nothing tracking you. Open the link, search for an attack, filter by decade or type, and click any card to read the full story behind it — written to actually be read, not skimmed.
 
