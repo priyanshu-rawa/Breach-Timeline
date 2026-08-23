@@ -695,22 +695,21 @@ console.log('Cyber Attack Timeline loaded – enjoy!');
 })();
 
 // ============================================================
-// ABOUT SECTION – CURSOR SPOTLIGHT (decorative only)
+// CURSOR SPOTLIGHT (decorative only, reusable)
 // ============================================================
-(() => {
-    const container = document.getElementById('aboutContainer');
-    if (!container || prefersReducedMotion) return;
+function initSpotlight(el, mxVar, myVar) {
+    if (!el || prefersReducedMotion) return;
     let ticking = false;
     let pointer = { x: 0, y: 0 };
 
     function apply() {
         ticking = false;
-        const rect = container.getBoundingClientRect();
-        container.style.setProperty('--about-mx', `${((pointer.x - rect.left) / rect.width) * 100}%`);
-        container.style.setProperty('--about-my', `${((pointer.y - rect.top) / rect.height) * 100}%`);
+        const rect = el.getBoundingClientRect();
+        el.style.setProperty(mxVar, `${((pointer.x - rect.left) / rect.width) * 100}%`);
+        el.style.setProperty(myVar, `${((pointer.y - rect.top) / rect.height) * 100}%`);
     }
 
-    container.addEventListener('pointermove', (e) => {
+    el.addEventListener('pointermove', (e) => {
         pointer.x = e.clientX;
         pointer.y = e.clientY;
         if (!ticking) {
@@ -718,7 +717,10 @@ console.log('Cyber Attack Timeline loaded – enjoy!');
             requestAnimationFrame(apply);
         }
     });
-})();
+}
+
+initSpotlight(document.getElementById('aboutContainer'), '--about-mx', '--about-my');
+initSpotlight(document.getElementById('heroStats'), '--stats-mx', '--stats-my');
 const backToTopBtn = document.getElementById('backToTop');
 if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {

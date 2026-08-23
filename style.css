@@ -217,6 +217,7 @@ body {
 }
 
 .hero-badge {
+    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -230,6 +231,7 @@ body {
     letter-spacing: 0.04em;
     text-transform: uppercase;
     margin-bottom: 1.5rem;
+    overflow: hidden;
 }
 .hero-badge i {
     color: var(--accent);
@@ -245,6 +247,12 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    background-size: 200% 100%;
+    animation: heroTitleShine 8s ease-in-out infinite;
+}
+@keyframes heroTitleShine {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 .hero-subtitle {
@@ -256,6 +264,10 @@ body {
 }
 
 .hero-stats {
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -266,13 +278,47 @@ body {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     backdrop-filter: blur(8px);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-stats:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+}
+.hero-stats::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    z-index: -1;
+    border-radius: calc(var(--radius) + 2px);
+    background: conic-gradient(from 0deg, var(--accent), var(--accent-cyan), var(--accent-amber), var(--accent), var(--accent-cyan));
+    animation: aboutBorderSpin 9s linear infinite;
+    opacity: 0.4;
+}
+.hero-stats::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(300px circle at var(--stats-mx, 50%) var(--stats-my, 50%), rgba(74, 140, 247, 0.16), transparent 70%);
+    transition: opacity 0.4s ease;
+}
+.hero-stats:hover::after {
+    opacity: 1;
 }
 
 .stat-item {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     animation: floatStat 4s ease-in-out infinite;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.stat-item:hover {
+    transform: scale(1.08) translateY(-2px);
 }
 .stat-item:nth-child(1) { animation-delay: 0s; }
 .stat-item:nth-child(2) { animation-delay: 0.5s; }
@@ -302,6 +348,45 @@ body {
     width: 1px;
     height: 2.5rem;
     background: var(--border-color);
+    position: relative;
+    z-index: 1;
+}
+
+/* Reusable "live" pulse dot — used in badges across the page */
+.live-dot,
+.about-live-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-cyan);
+    margin-right: 0.4rem;
+    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6);
+    animation: aboutLivePulse 2s ease-out infinite;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+/* Animated underline that draws in when section titles scroll into view */
+.about-title {
+    position: relative;
+    display: inline-block;
+}
+.about-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    height: 2px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-cyan));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible .about-title::after,
+.reveal .about-title.in-view::after {
+    transform: scaleX(1);
 }
 
 .hero-scroll {
@@ -1454,28 +1539,11 @@ body {
     z-index: 1;
 }
 
-.about-live-dot {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent-cyan);
-    margin-right: 0.5rem;
-    box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6);
-    animation: aboutLivePulse 2s ease-out infinite;
-    vertical-align: middle;
-}
-
-@keyframes aboutLivePulse {
-    0% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.6); }
-    70% { box-shadow: 0 0 0 8px rgba(56, 189, 248, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(56, 189, 248, 0); }
-}
-
 @media (prefers-reduced-motion: reduce) {
     .about-glow-border,
     .about-quote-icon,
-    .about-live-dot {
+    .about-live-dot,
+    .live-dot {
         animation: none;
     }
 }
