@@ -5,11 +5,9 @@
 </p>
 
 <p align="center">
-  <a href="https://breach-timeline-kappa.vercel.app/"><strong>Live Demo →</strong></a>
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Live%20Demo-Visit%20Site-4a8cf7?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo">
+  <a href="https://breach-timeline-kappa.vercel.app/">
+    <img src="https://img.shields.io/badge/Live%20Demo-Visit%20Site-4a8cf7?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo">
+  </a>
   <img src="https://img.shields.io/github/stars/priyanshu-rawa/Breach-Timeline?style=for-the-badge&color=e8a06a&logo=github" alt="GitHub Stars">
   <img src="https://img.shields.io/github/forks/priyanshu-rawa/Breach-Timeline?style=for-the-badge&color=38bdf8&logo=github" alt="GitHub Forks">
 </p>
