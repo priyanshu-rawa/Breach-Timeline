@@ -3,7 +3,8 @@
 <h1 align="center">Cyber Attack Timeline</h1>
 
 <p align="center">
-  <strong>An interactive, story-driven journey through the cyber attacks that shaped modern cybersecurity</strong> — from the Morris Worm in 1988 to Foxconn's 2026 ransomware breach.
+  <strong>36 breaches. 5 decades. One question behind every one of them: what actually went wrong?</strong><br>
+  From the Morris Worm in 1988 to Foxconn's 2026 ransomware breach — told as stories, not spreadsheets.
 </p>
 
 <div align="center">
@@ -37,7 +38,7 @@
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:4a8cf7,100:38bdf8&height=3&width=1000" width="100%"/>
 
-> **From the first internet worms to modern supply-chain ransomware — explore how cyber attacks evolved, why they actually happened, and what they still teach us today.**
+> **From the first internet worms to modern supply-chain ransomware — see how attacks evolved, why they actually happened, and what they're still teaching us today.**
 
 <p align="center">
   <img src="assets/screenshot.png" alt="Breach Timeline Screenshot" width="100%">
@@ -67,17 +68,17 @@
 
 **[Open Breach Timeline →](https://breach-timeline-kappa.vercel.app/)**
 
-There's nothing to install, no sign-up, and nothing tracking you. Open the link, search for an attack, filter by decade or type, and click any card to read the full story behind it — written to actually be read, not skimmed.
+Nothing to install, no sign-up, nothing tracking you. Just open the link, search for an attack, filter by decade or type, and click a card to read the full story — written to actually be read, not skimmed.
 
 ---
 
 ## 💡 Why I Built This
 
-I'm self-taught in cybersecurity, learning it the way most people actually do — one breach write-up, one late-night rabbit hole at a time. Along the way I kept running into the same problem: the history of this field is genuinely interesting, but it's scattered across a thousand different articles and videos, almost none of it written for someone who's just getting curious.
+I'm self-taught in cybersecurity, learning it the way most people actually do — one breach write-up and one late-night rabbit hole at a time. And I kept hitting the same wall: the history of this field is genuinely fascinating, but it's scattered across a thousand articles and YouTube videos, and almost none of it is written for someone who's just getting curious.
 
-So I built the site I wish I'd had. Not a plain list of dates, but something you can sit with — search it, filter it, open a card and read *why* the Morris Worm happened, *how* Stuxnet physically destroyed centrifuges, *what decision* turned Colonial Pipeline into a national fuel shortage. The bigger reason it matters: the same patterns behind these headline-making breaches — phishing, reused passwords, unpatched software, weak two-factor authentication — are exactly what shows up in attacks on regular people every day. Understanding the big ones is one of the best ways to protect yourself from the small ones.
+So I built the site I wish I'd had. Not a plain list of dates, but something you can actually sit with — search it, filter it, open a card and find out *why* the Morris Worm happened, *how* Stuxnet physically tore apart centrifuges, *what one decision* turned Colonial Pipeline into a national fuel shortage. And here's the part that matters most: the same patterns behind these headline-making breaches — phishing, reused passwords, unpatched software, weak two-factor authentication — are exactly what shows up in attacks on regular people every single day. Understanding the big ones is one of the best ways to protect yourself from the small ones.
 
-You don't need a technical background to use this site or read this README. If a term trips you up along the way, that's just a sign to look it up, not a sign this isn't for you.
+You don't need a technical background to use this site, or to read this README. If a term trips you up along the way, take it as a sign to go look it up — not a sign this isn't for you.
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:38bdf8,100:4a8cf7&height=3&width=1000" width="100%"/>
 
@@ -91,7 +92,7 @@ You don't need a technical background to use this site or read this README. If a
 | 🎨 **Icons & Type** | Font Awesome, Google Fonts |
 | ☁️ **Hosting** | Static site on GitHub Pages — no server, no database, no backend |
 
-Zero build step, zero `npm install`. Open `index.html` and it works.
+Zero build step, zero `npm install`. Open `index.html` and it just works.
 
 ---
 
@@ -110,7 +111,7 @@ Breach-Timeline/
 └── LICENSE
 ```
 
-Three files, no build pipeline — easy to read top to bottom and understand exactly what's happening.
+Three files, no build pipeline — read it top to bottom and you'll understand exactly what's happening.
 
 ---
 
@@ -129,7 +130,7 @@ Just open `index.html` in your browser, or serve it locally if you'd rather:
 python -m http.server 8000
 ```
 
-Then visit `http://localhost:8000`. No install step, no configuration — just a browser.
+Then visit `http://localhost:8000`. No install step, no configuration — just a browser and you're in.
 
 ---
 
@@ -149,13 +150,13 @@ Five decades, thirty-six incidents:
 
 </div>
 
-From the Morris Worm, AIDS Trojan, and Melissa Virus at the start of it all, through Stuxnet, WannaCry, NotPetya, and the SolarWinds supply-chain attack that changed how the industry thinks about trust in software — up to 2025 and 2026's Marks & Spencer, Jaguar Land Rover, and Foxconn breaches.
+It starts with the Morris Worm, the AIDS Trojan, and the Melissa Virus. It moves through Stuxnet, WannaCry, NotPetya, and the SolarWinds supply-chain attack that permanently changed how the industry thinks about trust in software. And it ends up right at 2025 and 2026, with the Marks & Spencer, Jaguar Land Rover, and Foxconn breaches.
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:4a8cf7,100:38bdf8&height=3&width=1000" width="100%"/>
 
 ## 🤝 Contributing
 
-Contributions are genuinely welcome — this project gets better every time someone who knows more than me points something out.
+Contributions are genuinely welcome — this project gets better every time someone who knows more than I do points something out.
 
 ```bash
 git clone https://github.com/YOUR-USERNAME/Breach-Timeline.git
@@ -167,9 +168,9 @@ git commit -m "Improve timeline information"
 git push origin improve-timeline
 ```
 
-Then open a pull request. Good places to help: adding a historically significant incident I missed, fixing a date or detail that's gone stale, improving accessibility or mobile responsiveness, refining an animation, or improving these docs. Not sure if your idea fits? Open an issue first — that's always welcome.
+Then open a pull request. Some good places to start: add a historically significant incident I missed, fix a date or detail that's gone stale, improve accessibility or mobile responsiveness, refine an animation, or improve these docs. Not sure if your idea fits? Open an issue first — that's always welcome too.
 
-A few things to keep in mind before submitting a PR: keep changes focused, match the existing visual style, avoid adding dependencies unless they're genuinely necessary, test on both desktop and mobile, and use clear commit messages. For historical claims, cite something reliable. The goal is to keep this lightweight and easy for the next person to learn from.
+A few things to keep in mind before submitting a PR: keep changes focused, match the existing visual style, avoid adding dependencies unless they're genuinely necessary, and test on both desktop and mobile with clear commit messages. For historical claims, cite something reliable. The goal is simple — keep this lightweight, and keep it easy for the next person to learn from.
 
 ---
 
@@ -185,7 +186,7 @@ Open source. See the [LICENSE](LICENSE) file for full terms.
 
 **Priyanshu**
 
-Self-taught, still learning, building this as a way to understand cybersecurity history properly — and to make it a little less intimidating for the next person starting where I did.
+Self-taught, still learning — building this as a way to actually understand cybersecurity history, and to make it a little less intimidating for the next person starting exactly where I did.
 
 <a href="https://github.com/priyanshu-rawa">
   <img src="https://img.shields.io/badge/GitHub-@priyanshu--rawa-181717?style=for-the-badge&logo=github&logoColor=white&labelColor=0a0f1a" alt="GitHub">
@@ -209,7 +210,7 @@ Self-taught, still learning, building this as a way to understand cybersecurity 
 
 <div align="center">
 
-If this project taught you something, or you just liked poking around in it, a star genuinely means a lot — it's the main way projects like this get found by the next curious person.
+If this project taught you something, or you just enjoyed poking around in it, a star genuinely means a lot. This is a fresh project with zero history behind it — every single star is how the next curious person actually finds it.
 
 **[⭐ Star this repo](https://github.com/priyanshu-rawa/Breach-Timeline)** · **[🐛 Report an issue](https://github.com/priyanshu-rawa/Breach-Timeline/issues)** · **[🔀 Open a pull request](https://github.com/priyanshu-rawa/Breach-Timeline/pulls)**
 
