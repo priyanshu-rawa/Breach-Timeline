@@ -1,4 +1,4 @@
-<h1 align="center">🕸️ Cyber Attack Timeline</h1>
+<h1 align="center">Cyber Attack Timeline</h1>
 
 <p align="center">
   <strong>An interactive, story-driven journey through the cyber attacks that shaped modern cybersecurity</strong> — from the Morris Worm in 1988 to Foxconn's 2026 ransomware breach.
@@ -23,63 +23,49 @@
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square" alt="PRs Welcome">
 </p>
 
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0a0f1a,50:4a8cf7,100:38bdf8&height=180&section=header&text=Breach%20Timeline&fontSize=48&fontColor=ffffff&fontAlignY=40&animation=fadeIn&desc=A%20Visual%20History%20of%20Cybercrime&descAlignY=62&descSize=18" alt="Breach Timeline banner" width="100%">
+</p>
+
 > **From the first internet worms to modern supply-chain ransomware — explore how cyber attacks evolved, why they actually happened, and what they still teach us today.**
 
 ![Breach Timeline Screenshot](assets/screenshot.png)
 
-<p align="center"><em>Dark, glowing, tilt-responsive cards. A live-animated stats chart. Zero frameworks. Just HTML, CSS, and JS doing more than they usually get credit for.</em></p>
+---
+
+## Live Demo
+
+**[Open Breach Timeline →](https://priyanshu-rawa.github.io/Breach-Timeline)**
+
+There's nothing to install, no sign-up, and nothing tracking you. Open the link, search for an attack, filter by decade or type, and click any card to read the full story behind it — written to actually be read, not skimmed.
 
 ---
 
-## ✨ Live Demo
+## Why I Built This
 
-**[→ Open Breach Timeline](https://priyanshu-rawa.github.io/Breach-Timeline)**
+I'm self-taught in cybersecurity, learning it the way most people actually do — one breach write-up, one late-night rabbit hole at a time. Along the way I kept running into the same problem: the history of this field is genuinely interesting, but it's scattered across a thousand different articles and videos, almost none of it written for someone who's just getting curious.
 
-Nothing to install, no sign-up, no tracking. Open it, search for an attack, filter by decade or type, and click any card open to read the full story behind it.
+So I built the site I wish I'd had. Not a plain list of dates, but something you can sit with — search it, filter it, open a card and read *why* the Morris Worm happened, *how* Stuxnet physically destroyed centrifuges, *what decision* turned Colonial Pipeline into a national fuel shortage. The bigger reason it matters: the same patterns behind these headline-making breaches — phishing, reused passwords, unpatched software, weak two-factor authentication — are exactly what shows up in attacks on regular people every day. Understanding the big ones is one of the best ways to protect yourself from the small ones.
 
----
-
-## 🧠 Why I Built This
-
-I'm self-taught in cybersecurity, learning it the way most of us actually do — one breach write-up, one CVE, one late-night rabbit hole at a time. While going down that rabbit hole over and over, I kept hitting the same wall: the *history* of this field is genuinely fascinating, but it's scattered across a thousand different articles, reports, and YouTube explainers, almost none of it written for someone who's just getting curious.
-
-So I built the timeline I wish I'd had. Not a Wikipedia-style list of dates, but something you can actually sit with — search it, filter it, click a card open and read *why* the Morris Worm happened, *how* Stuxnet physically destroyed centrifuges, *what decision* turned Colonial Pipeline into a national fuel shortage. The bigger reason it matters: the same patterns behind these massive, headline-making breaches — phishing, reused passwords, unpatched software, weak MFA — are exactly what shows up in attacks on regular people every single day. Understanding the big ones is one of the best ways to protect yourself from the small ones.
-
-History doesn't repeat itself. But it rhymes — loudly, if you know what to listen for.
+You don't need a technical background to use this site or read this README. If a term trips you up along the way, that's just a sign to look it up, not a sign this isn't for you.
 
 ---
 
-## 🚀 What's Inside
-
-This isn't a static list anymore — it's grown into a full interactive experience:
-
-- **36 major incidents**, 1988 → 2026, each with a short summary *and* a full "why it happened" story, written to be read, not skimmed
-- **Click-to-expand cards** with a buttery, physics-based reveal — no jank, no layout shift to neighboring cards
-- **3D tilt + cursor-spotlight** on every card, GPU-accelerated and rAF-throttled so it never drops a frame
-- **A live-animated stats chart** — bars grow with elastic easing and numbers count up from zero as you scroll to them
-- **Fully custom, animated dropdown filters** — not the boring native browser `<select>`
-- **Buttery smooth scrolling** across the whole page (powered by Lenis + GSAP ScrollTrigger)
-- **A real "Protect Your Devices" section** linking to actual official/independent security guides — not affiliate spam
-- **A "Helpful Tips" section** covering password managers, MFA apps, private email clients, VPNs, and privacy-respecting browsers
-- **An FAQ accordion**, dark/light mode, `Ctrl+K` search shortcut, and a fully responsive layout down to mobile
-
----
-
-## 🛠️ Tech Stack
+## Tech Stack
 
 | | |
 |---|---|
-| **Structure & Styling** | Semantic HTML5, hand-written CSS3 (custom properties, grid, `conic-gradient` glow rings, no Tailwind, no compiler) |
-| **Interactivity** | Vanilla JavaScript — no React, no Vue, no framework of any kind |
-| **Motion** | [GSAP](https://gsap.com/) + ScrollTrigger for the chart and scroll-triggered reveals, [Lenis](https://lenis.darkroom.engineering/) for smooth scrolling |
-| **Icons & Type** | Font Awesome 6, Google Fonts (Playfair Display, Inter, JetBrains Mono) |
-| **Hosting** | Static site on GitHub Pages — no server, no database, no backend at all |
+| **Structure & Styling** | Plain HTML5 and hand-written CSS3 — no Tailwind, no compiler, no framework |
+| **Interactivity** | Vanilla JavaScript — no React, no Vue |
+| **Motion** | [GSAP](https://gsap.com/) for scroll-triggered animation, [Lenis](https://lenis.darkroom.engineering/) for smooth scrolling |
+| **Icons & Type** | Font Awesome, Google Fonts |
+| **Hosting** | Static site on GitHub Pages — no server, no database, no backend |
 
-**Zero build step. Zero npm install. Zero bloat.** Open `index.html` and it just works.
+Zero build step, zero `npm install`. Open `index.html` and it works.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```text
 Breach-Timeline/
@@ -94,30 +80,30 @@ Breach-Timeline/
 └── LICENSE
 ```
 
-Kept deliberately simple. Three files, no build pipeline, easy to read top to bottom and understand exactly what's happening.
+Three files, no build pipeline — easy to read top to bottom and understand exactly what's happening.
 
 ---
 
-## ⚡ Getting Started
+## Getting Started
 
-Clone it and open it. That's genuinely the whole setup.
+Clone it and open it. That's the whole setup.
 
 ```bash
 git clone https://github.com/priyanshu-rawa/Breach-Timeline.git
 cd Breach-Timeline
 ```
 
-Just double-click `index.html`, or serve it locally if you prefer:
+Just open `index.html` in your browser, or serve it locally if you'd rather:
 
 ```bash
 python -m http.server 8000
 ```
 
-Then visit `http://localhost:8000`. No `npm install`, no build step, no framework config — just a browser.
+Then visit `http://localhost:8000`. No install step, no configuration — just a browser.
 
 ---
 
-## 📚 What's Covered
+## What's Covered
 
 Five decades, thirty-six incidents:
 
@@ -129,11 +115,11 @@ Five decades, thirty-six incidents:
 | 2010s | 15 |
 | 2020s | 10 |
 
-From the Morris Worm, AIDS Trojan, and Melissa Virus at the origin of it all, through Stuxnet, WannaCry, NotPetya, and the SolarWinds supply-chain attack that redefined "trust" in software — all the way to 2025–2026's Marks & Spencer, Jaguar Land Rover, and Foxconn breaches, still unfolding as this project is maintained.
+From the Morris Worm, AIDS Trojan, and Melissa Virus at the start of it all, through Stuxnet, WannaCry, NotPetya, and the SolarWinds supply-chain attack that changed how the industry thinks about trust in software — up to 2025 and 2026's Marks & Spencer, Jaguar Land Rover, and Foxconn breaches.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are genuinely welcome — this project gets better every time someone who knows more than me points something out.
 
@@ -147,27 +133,19 @@ git commit -m "Improve timeline information"
 git push origin improve-timeline
 ```
 
-Then open a pull request. Good places to help:
+Then open a pull request. Good places to help: adding a historically significant incident I missed, fixing a date or detail that's gone stale, improving accessibility or mobile responsiveness, refining an animation, or improving these docs. Not sure if your idea fits? Open an issue first — that's always welcome.
 
-- Adding a historically significant incident I missed
-- Fixing a date, figure, or detail that's gone stale
-- Improving accessibility or mobile responsiveness
-- Refining animations or squashing a bug
-- Improving these docs
-
-Not sure if your idea fits? Open an issue first — that's always welcome.
-
-A few ground rules before submitting a PR: keep changes focused, match the existing visual language, avoid adding dependencies unless they're genuinely necessary, test on both desktop and mobile, and use clear commit messages. For historical claims, cite something reliable. The goal is to keep this lightweight, readable, and easy for the next person to learn from.
+A few things to keep in mind before submitting a PR: keep changes focused, match the existing visual style, avoid adding dependencies unless they're genuinely necessary, test on both desktop and mobile, and use clear commit messages. For historical claims, cite something reliable. The goal is to keep this lightweight and easy for the next person to learn from.
 
 ---
 
-## 📄 License
+## License
 
-Open source. See the [LICENSE](LICENSE) file for the full terms.
+Open source. See the [LICENSE](LICENSE) file for full terms.
 
 ---
 
-##  Author
+## Author
 
 **Priyanshu**
 
@@ -179,8 +157,8 @@ GitHub: [@priyanshu-rawa](https://github.com/priyanshu-rawa)
 
 <div align="center">
 
-If this project taught you something, or you just liked poking around in it — a ⭐ genuinely means a lot. It's the main way projects like this get found by the next curious person.
+If this project taught you something, or you just liked poking around in it, a star genuinely means a lot — it's the main way projects like this get found by the next curious person.
 
-**[⭐ Star this repo](https://github.com/priyanshu-rawa/Breach-Timeline)** · **[🐛 Report an issue](https://github.com/priyanshu-rawa/Breach-Timeline/issues)** · **[🔀 Open a PR](https://github.com/priyanshu-rawa/Breach-Timeline/pulls)**
+**[Star this repo](https://github.com/priyanshu-rawa/Breach-Timeline)** · **[Report an issue](https://github.com/priyanshu-rawa/Breach-Timeline/issues)** · **[Open a pull request](https://github.com/priyanshu-rawa/Breach-Timeline/pulls)**
 
 </div>
