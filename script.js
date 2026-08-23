@@ -233,9 +233,6 @@ function renderTimeline(data) {
                                 <div class="lessons-heading"><i class="fas fa-book-open"></i> The story: why, how &amp; what happened</div>
                                 <p>${a.story || ''}</p>
                             </div>
-                            <a class="read-source-link" href="https://en.wikipedia.org/w/index.php?search=${encodeURIComponent(a.title + ' ' + a.year + ' cyberattack')}" target="_blank" rel="noopener">
-                                <i class="fab fa-wikipedia-w"></i> Read more on Wikipedia <i class="fas fa-arrow-up-right-from-square"></i>
-                            </a>
                         </div>
                     </div>
                     <button class="expand-toggle" type="button" aria-expanded="false">
