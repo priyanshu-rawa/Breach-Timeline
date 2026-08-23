@@ -243,6 +243,16 @@ body {
     font-weight: 900;
     letter-spacing: -0.03em;
     line-height: 1.05;
+}
+.hero h1 .word {
+    display: inline-block;
+    overflow: hidden;
+    padding-bottom: 0.08em;
+    margin-bottom: -0.08em;
+    vertical-align: top;
+}
+.hero h1 .word span {
+    display: inline-block;
     background: linear-gradient(135deg, var(--text-primary) 40%, var(--text-secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -1769,6 +1779,27 @@ body {
         margin: 3rem auto;
         padding: 0 1.2rem;
     }
+}
+
+/* ============================================
+   TRAILING CURSOR GLOW
+   ============================================ */
+.cursor-trail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(74, 140, 247, 0.7), rgba(56, 189, 248, 0.15) 60%, transparent 75%);
+    pointer-events: none;
+    z-index: 9998;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    mix-blend-mode: screen;
+}
+.cursor-trail-active {
+    width: 44px;
+    height: 44px;
 }
 
 /* ============================================

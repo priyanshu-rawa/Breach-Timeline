@@ -276,17 +276,35 @@ function filterAttacks() {
 // STATS UPDATES
 // ============================================================
 function updateStats(data) {
-    totalAttacksEl.textContent = data.length;
-
     const decades = new Set(data.map(a => Math.floor(a.year / 10) * 10));
-    totalDecadesEl.textContent = decades.size;
-
     const impactMap = {
         'Worm': 1.5, 'Virus': 2, 'Ransomware': 4, 'Data Breach': 3,
         'DDoS': 1, 'Supply Chain': 5, 'APT': 4, 'Other': 1
     };
     const total = data.reduce((sum, a) => sum + (impactMap[a.type] || 1), 0);
-    totalImpactEl.textContent = `$${(total * 0.5).toFixed(1)}B+`;
+    const impactValue = total * 0.5;
+
+    if (prefersReducedMotion || typeof gsap === 'undefined') {
+        totalAttacksEl.textContent = data.length;
+        totalDecadesEl.textContent = decades.size;
+        totalImpactEl.textContent = `$${impactValue.toFixed(1)}B+`;
+        return;
+    }
+
+    const counters = { attacks: 0, decades: 0, impact: 0 };
+    gsap.to(counters, {
+        attacks: data.length,
+        decades: decades.size,
+        impact: impactValue,
+        duration: 1.8,
+        ease: 'power2.out',
+        delay: 0.5,
+        onUpdate: () => {
+            totalAttacksEl.textContent = Math.round(counters.attacks);
+            totalDecadesEl.textContent = Math.round(counters.decades);
+            totalImpactEl.textContent = `$${counters.impact.toFixed(1)}B+`;
+        },
+    });
 }
 
 // ============================================================
@@ -551,6 +569,29 @@ updateStats(attacks);
 updateChart(attacks);
 
 // ============================================================
+// HERO TITLE – staggered word reveal on load
+// ============================================================
+(() => {
+    const words = document.querySelectorAll('#heroTitle .word > span');
+    if (!words.length) return;
+
+    if (prefersReducedMotion || typeof gsap === 'undefined') {
+        words.forEach(w => { w.style.opacity = '1'; w.style.transform = 'none'; });
+        return;
+    }
+
+    gsap.set(words, { yPercent: 110, opacity: 0 });
+    gsap.to(words, {
+        yPercent: 0,
+        opacity: 1,
+        duration: 0.9,
+        ease: 'power4.out',
+        stagger: 0.12,
+        delay: 0.2,
+    });
+})();
+
+// ============================================================
 // (Starfield particle canvas removed – replaced by CSS aurora background)
 // ============================================================
 
@@ -756,6 +797,58 @@ initSpotlight(document.getElementById('heroStats'), '--stats-mx', '--stats-my');
         },
     });
 })();
+
+// ============================================================
+// MAGNETIC BUTTONS – buttons gently pull toward the cursor
+// ============================================================
+(() => {
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (prefersReducedMotion || isTouch || typeof gsap === 'undefined') return;
+
+    const magnets = document.querySelectorAll('.btn-icon, .btn-clear, .expand-toggle, .footer-top-btn, .custom-select-trigger');
+    magnets.forEach(el => {
+        el.addEventListener('pointermove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const relX = e.clientX - (rect.left + rect.width / 2);
+            const relY = e.clientY - (rect.top + rect.height / 2);
+            gsap.to(el, { x: relX * 0.25, y: relY * 0.35, duration: 0.4, ease: 'power2.out' });
+        });
+        el.addEventListener('pointerleave', () => {
+            gsap.to(el, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.4)' });
+        });
+    });
+})();
+
+// ============================================================
+// TRAILING CURSOR GLOW – soft dot that follows the pointer
+// ============================================================
+(() => {
+    const isTouch = window.matchMedia('(pointer: coarse)').matches;
+    if (prefersReducedMotion || isTouch || typeof gsap === 'undefined') return;
+
+    const dot = document.createElement('div');
+    dot.className = 'cursor-trail';
+    document.body.appendChild(dot);
+
+    const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    gsap.set(dot, { xPercent: -50, yPercent: -50 });
+
+    window.addEventListener('pointermove', (e) => {
+        gsap.to(pos, {
+            x: e.clientX,
+            y: e.clientY,
+            duration: 0.5,
+            ease: 'power3.out',
+            onUpdate: () => gsap.set(dot, { x: pos.x, y: pos.y }),
+        });
+    });
+
+    document.querySelectorAll('a, button, .timeline-item, input, .custom-select-trigger').forEach(el => {
+        el.addEventListener('pointerenter', () => dot.classList.add('cursor-trail-active'));
+        el.addEventListener('pointerleave', () => dot.classList.remove('cursor-trail-active'));
+    });
+})();
+
 const backToTopBtn = document.getElementById('backToTop');
 if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
