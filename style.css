@@ -1368,6 +1368,13 @@ body {
     pointer-events: none;
     overflow: hidden;
     opacity: 0.8;
+    filter: hue-rotate(calc(var(--scroll-progress, 0) * 45deg));
+}
+
+.aurora-layer {
+    position: absolute;
+    inset: 0;
+    will-change: transform;
 }
 
 .aurora-bg span {
@@ -1380,21 +1387,21 @@ body {
     mix-blend-mode: screen;
 }
 
-.aurora-bg span:nth-child(1) {
+.aurora-layer:nth-child(1) span {
     top: -15%;
     left: -10%;
     background: radial-gradient(circle, rgba(74, 140, 247, 0.35), transparent 70%);
     animation: auroraDrift1 26s ease-in-out infinite;
 }
 
-.aurora-bg span:nth-child(2) {
+.aurora-layer:nth-child(2) span {
     top: 20%;
     right: -15%;
     background: radial-gradient(circle, rgba(56, 189, 248, 0.28), transparent 70%);
     animation: auroraDrift2 32s ease-in-out infinite;
 }
 
-.aurora-bg span:nth-child(3) {
+.aurora-layer:nth-child(3) span {
     bottom: -20%;
     left: 20%;
     width: 45vw;
@@ -1423,6 +1430,9 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .aurora-bg {
+        filter: none;
+    }
     .aurora-bg span {
         animation: none;
     }

@@ -721,6 +721,41 @@ function initSpotlight(el, mxVar, myVar) {
 
 initSpotlight(document.getElementById('aboutContainer'), '--about-mx', '--about-my');
 initSpotlight(document.getElementById('heroStats'), '--stats-mx', '--stats-my');
+
+// ============================================================
+// SCROLL-REACTIVE BACKGROUND (FAANG-style parallax + color drift)
+// Aurora blobs shift at different speeds as you scroll, and the
+// whole background slowly drifts hue — all driven by scroll
+// position via GSAP ScrollTrigger, smoothed through Lenis.
+// ============================================================
+(() => {
+    if (prefersReducedMotion || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    const layers = document.querySelectorAll('.aurora-layer');
+    layers.forEach(layer => {
+        const depth = parseFloat(layer.dataset.depth) || 0.2;
+        gsap.to(layer, {
+            yPercent: depth * 100,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: document.body,
+                start: 'top top',
+                end: 'bottom bottom',
+                scrub: 1.2,
+            },
+        });
+    });
+
+    ScrollTrigger.create({
+        trigger: document.body,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: 0.5,
+        onUpdate: (self) => {
+            document.documentElement.style.setProperty('--scroll-progress', self.progress.toFixed(4));
+        },
+    });
+})();
 const backToTopBtn = document.getElementById('backToTop');
 if (backToTopBtn) {
     backToTopBtn.addEventListener('click', () => {
