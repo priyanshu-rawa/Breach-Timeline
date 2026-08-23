@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <a href="https://priyanshu-rawa.github.io/Breach-Timeline"><strong>Live Demo →</strong></a>
+  <a href="https://breach-timeline-kappa.vercel.app/"><strong>Live Demo →</strong></a>
 </p>
 
 <p align="center">
