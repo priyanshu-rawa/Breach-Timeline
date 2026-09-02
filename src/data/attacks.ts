@@ -1,0 +1,372 @@
+export type AttackType =
+  | 'Worm'
+  | 'Virus'
+  | 'Ransomware'
+  | 'Data Breach'
+  | 'DDoS'
+  | 'Supply Chain'
+  | 'APT'
+  | 'Other';
+
+export interface Attack {
+  year: number;
+  title: string;
+  description: string;
+  story: string;
+  type: AttackType;
+  impact: string;
+  lessons: string;
+  source?: string;
+}
+
+export const attacks: Attack[] = [
+  {
+    "year": 1988,
+    "title": "Morris Worm",
+    "description": "The first major internet worm, created by Robert Morris. Infected about 10% of all computers connected to the internet.",
+    "story": "Robert Morris, a Cornell graduate student, wrote it as an experiment to gauge the size of the internet, not to cause harm. A bug in his code made it replicate far more aggressively than intended, and because most machines ran identical, unpatched software, it spread almost everywhere at once. The fallout directly led to the creation of the world's first Computer Emergency Response Team.",
+    "type": "Worm",
+    "impact": "~6,000 computers, $10M+ in damages",
+    "lessons": "A single self-replicating program brought the early internet to its knees because almost nothing was patched or isolated. Today the same lesson holds: keep systems updated automatically, segment networks so one infected machine cannot flood everything else, and rate-limit unusual outbound connections.",
+    "source": "https://medium.com/@ajaypttm/the-morris-worm-a-deep-dive-into-the-first-major-internet-attack-bc1efe31346f"
+  },
+  {
+    "year": 1989,
+    "title": "AIDS Trojan",
+    "description": "The first ransomware. Distributed via floppy disks, it demanded $189 to unlock files.",
+    "story": "Dr. Joseph Popp mailed 20,000 infected floppy disks disguised as an AIDS research survey to conference attendees worldwide. Once installed, the program silently counted reboots before encrypting file names and demanding payment mailed to a PO box. It was crude by today's standards, but it invented the entire ransomware business model still used now.",
+    "type": "Ransomware",
+    "impact": "First ever ransomware, $189 ransom",
+    "lessons": "It spread through a mailed floppy disk, proving that any new distribution channel can be weaponized. Never run software from unsolicited physical or digital media, and keep offline backups so a locked drive is never a total loss.",
+    "source": "https://aleksazatezalo.medium.com/a-brief-history-of-ransomware-aa4325b0665b"
+  },
+  {
+    "year": 1999,
+    "title": "Melissa Virus",
+    "description": "The first major email virus. Spread via infected Word documents, causing massive email slowdowns.",
+    "story": "David L. Smith built Melissa to spread through Microsoft Word's macro feature, hiding inside a document promising passwords to adult websites. Once opened, it silently emailed itself to the first 50 contacts in the victim's address book, which is exactly why trust in familiar senders made it spread so fast. Corporate email systems buckled under the sheer volume, forcing many companies offline for days.",
+    "type": "Virus",
+    "impact": "$80M in damages, thousands infected",
+    "lessons": "Melissa spread because people trusted attachments from known contacts without a second thought. Disable auto-executing macros in Office documents by default, and treat any unexpected attachment — even from a familiar sender — with suspicion.",
+    "source": "https://tanyahere.medium.com/when-melissa-virus-transformed-the-worlds-perspective-on-cyber-security-df5b537d4704"
+  },
+  {
+    "year": 1999,
+    "title": "Chernobyl Virus",
+    "description": "A destructive virus that overwrote the first megabyte of hard drives, making systems unbootable.",
+    "story": "A student built it to prove that antivirus software of the era was inadequate. It hid inside pirated software and games, lying dormant until a trigger date — usually April 26, the anniversary of the Chernobyl disaster — then overwrote critical boot data. Because the payload activated all at once, hundreds of thousands of machines died on the very same day.",
+    "type": "Virus",
+    "impact": "Millions of computers damaged",
+    "lessons": "This virus showed how a tiny piece of code could destroy an entire system with no way to recover data. Regular, tested backups stored separately from the main machine remain the single best defense against destructive malware.",
+    "source": "https://medium.com/@anyrun/time-bombs-malware-with-delayed-execution-26f5b7591f48"
+  },
+  {
+    "year": 2000,
+    "title": "MafiaBoy DDoS",
+    "description": "A 16-year-old launched DDoS attacks that took down Yahoo, eBay, CNN, and Amazon.",
+    "story": "A Montreal teenager wanted bragging rights on hacking forums, so he rented a botnet of already-compromised university servers to flood targets with traffic. Because major commercial sites had never faced serious DDoS attacks before, none of them had defenses ready. His arrest made headlines and pushed companies to finally start investing in DDoS protection.",
+    "type": "DDoS",
+    "impact": "Major websites down for hours, millions in losses",
+    "lessons": "Even a teenager with basic tools could take major sites offline, showing that scale of target does not equal security. Modern sites rely on DDoS mitigation services, traffic scrubbing, and auto-scaling infrastructure to absorb sudden traffic floods.",
+    "source": "https://johnharish03.medium.com/mafiaboy-one-of-the-first-ddos-attacks-f017659e29c7"
+  },
+  {
+    "year": 2001,
+    "title": "Code Red Worm",
+    "description": "Exploited a vulnerability in IIS servers, defacing websites and spreading rapidly.",
+    "story": "The worm exploited a buffer-overflow bug in Microsoft's IIS web server software that had already been patched, but almost nobody had applied the update. It automatically scanned for other vulnerable servers, defaced their websites, and later used infected machines to attack the White House website. It became one of the clearest early lessons that patches only work if they are actually installed.",
+    "type": "Worm",
+    "impact": "~360,000 servers infected, $2.6B in damages",
+    "lessons": "It exploited a known, unpatched server flaw that had a fix available before the outbreak. Applying security patches promptly, especially on internet-facing servers, remains the cheapest and most effective protection available.",
+    "source": "https://medium.com/@isaleh/what-is-the-code-red-worm-virus-and-how-can-i-fix-it-aa1bb8b75f8e"
+  },
+  {
+    "year": 2003,
+    "title": "SQL Slammer",
+    "description": "The fastest-spreading worm in history. Infected 75,000 systems in just 10 minutes.",
+    "story": "A single tiny network packet exploiting a known Microsoft SQL Server bug was enough to fully compromise a machine and make it start blasting the same packet at random IP addresses. Because the exploit fit inside one packet, it spread faster than any human could react, doubling its infected population every few seconds. Airline check-in systems, ATMs, and even parts of South Korea's internet went down within the hour.",
+    "type": "Worm",
+    "impact": "Internet slowdowns, $1B+ in damages",
+    "lessons": "Slammer proved that unpatched database servers exposed directly to the internet are catastrophic risk. Never expose database ports publicly; place them behind firewalls and VPNs, and patch database software as urgently as any other critical system.",
+    "source": "https://medium.com/@gordoncoulter/why-sql-server-stability-is-a-bad-thing-49d05b6e642c"
+  },
+  {
+    "year": 2004,
+    "title": "MyDoom",
+    "description": "The fastest-spreading email worm ever. Caused massive email delays and network congestion.",
+    "story": "Many researchers believe MyDoom was released as a paid tool for spammers rather than pure vandalism, with infected machines later used to send junk email and launch DDoS attacks. It spread through attachments disguised as bounced messages, tricking people into opening what looked like an error notice. At its peak it was responsible for roughly one in every twelve emails sent worldwide.",
+    "type": "Virus",
+    "impact": "~$38B in damages, millions infected",
+    "lessons": "MyDoom relied entirely on users opening infected email attachments. Modern email filtering, attachment sandboxing, and basic user training on spotting suspicious emails cut this kind of spread dramatically.",
+    "source": "https://medium.com/@sammcmullen93/malware-viruses-and-cves-part-6-real-world-case-studies-35841f4f0171"
+  },
+  {
+    "year": 2007,
+    "title": "Operation Aurora",
+    "description": "Chinese hackers infiltrated Google and 30+ companies, stealing source code and IP.",
+    "story": "State-linked hackers targeted Google and dozens of other tech and defense companies specifically to steal source code and spy on human rights activists' email accounts. They got in through a previously unknown flaw in a web browser, delivered via a link sent to a handful of employees. Google's decision to publicly disclose the attack, and partially withdraw from China as a result, was almost unheard of for a company at the time.",
+    "type": "APT",
+    "impact": "Google China operations disrupted, major IP theft",
+    "lessons": "This was a targeted, patient intrusion aimed at stealing intellectual property rather than causing visible damage. Companies now rely on zero-trust access models, strict code-repository monitoring, and behavioral anomaly detection to catch slow, quiet intrusions like this.",
+    "source": "https://medium.com/@chiamaka.o/operation-aurora-8d189abb0824"
+  },
+  {
+    "year": 2008,
+    "title": "Conficker",
+    "description": "A sophisticated worm that infected millions of Windows systems, forming one of the largest botnets ever.",
+    "story": "Conficker exploited a Windows networking flaw to spread automatically between machines on the same network, then used weak or default admin passwords to jump even further. Its authors built in code to disable Windows Update and antivirus tools on infected machines so victims couldn't easily fix themselves. Despite infecting millions of PCs, its true purpose was never fully confirmed, and no one was ever definitively identified as its creator.",
+    "type": "Worm",
+    "impact": "Millions infected, $9B+ in cleanup costs",
+    "lessons": "Conficker combined a patched vulnerability with weak passwords and disabled security tools to spread. Strong, unique passwords, prompt patching, and never disabling built-in antivirus or update services close the exact gaps it used.",
+    "source": "https://medium.com/@donovan.adams/what-is-this-confiker-y-you-speak-of-an-overview-of-the-conficker-worm-eb4997928107"
+  },
+  {
+    "year": 2010,
+    "title": "Stuxnet",
+    "description": "The first known cyber weapon. Destroyed Iranian nuclear centrifuges, changing cyber warfare forever.",
+    "story": "Believed to be a joint state operation, Stuxnet was built specifically to sabotage Iran's uranium enrichment program without anyone noticing for as long as possible. It spread through infected USB drives to jump the \"air gap\" separating the nuclear facility from the internet, then subtly sped up and slowed down centrifuges until they physically tore themselves apart, all while feeding false \"everything normal\" readings to human operators. The decision to use malware as a physical weapon, rather than airstrikes, marked the start of modern cyberwarfare.",
+    "type": "APT",
+    "impact": "1,000+ centrifuges destroyed, $100M+ in damage",
+    "lessons": "Stuxnet showed that even air-gapped industrial systems can be reached through infected USB drives. Critical infrastructure now requires strict USB/media controls, network segmentation between IT and industrial control systems, and continuous monitoring for unusual equipment behavior.",
+    "source": "https://medium.com/@emmanuelabasim/stuxnet-the-cyber-weapon-that-destroyed-nuclear-centrifuges-9ae4a839e638"
+  },
+  {
+    "year": 2011,
+    "title": "Sony PlayStation Hack",
+    "description": "Personal data of 77 million users stolen. The PlayStation Network was down for 23 days.",
+    "story": "Hackers broke into Sony's PlayStation Network largely to embarrass the company after it sued a well-known console hacker, but ended up walking away with tens of millions of users' personal and card details. Sony's decision to stay silent for nearly a week before disclosing the breach drew heavy criticism and regulatory scrutiny. The 23-day network outage remains one of the longest in gaming history.",
+    "type": "Data Breach",
+    "impact": "77M accounts exposed, $171M in losses",
+    "lessons": "Sensitive user data was stored without adequate encryption, magnifying the damage once attackers got in. Encrypting data at rest, tokenizing payment details, and having a rehearsed incident-response plan reduce both the breach impact and recovery time.",
+    "source": "https://medium.com/@arpitpandeyofc/2011-playstation-network-outage-explained-58ab654846ad"
+  },
+  {
+    "year": 2012,
+    "title": "LinkedIn Breach",
+    "description": "6.5 million hashed passwords were stolen and leaked online.",
+    "story": "An attacker exfiltrated LinkedIn's password database and posted the hashes to a hacking forum, where they were cracked within days because LinkedIn had used an outdated, unsalted hashing method. LinkedIn initially confirmed only 6.5 million leaked passwords; the true number surfaced years later as over 100 million. The delayed, understated disclosure became a textbook example of what not to do after a breach.",
+    "type": "Data Breach",
+    "impact": "6.5M passwords exposed, LinkedIn later fined",
+    "lessons": "The passwords were hashed but with a weak, unsalted algorithm that was easy to crack. Modern systems must use salted, slow hashing algorithms like bcrypt or Argon2, and users should enable multi-factor authentication so a leaked password alone is not enough.",
+    "source": "https://medium.com/@Keylogncoffee./your-password-gets-hashed-not-encrypted-35242097d612"
+  },
+  {
+    "year": 2013,
+    "title": "Yahoo Breach",
+    "description": "The largest data breach ever. All 3 billion Yahoo accounts were compromised.",
+    "story": "State-sponsored hackers compromised Yahoo's entire user database through a spear-phishing email sent to a single employee. Yahoo did not publicly disclose the breach for three years, and even then understated its scope before eventually admitting all 3 billion accounts were affected. The breach was revealed during Yahoo's acquisition talks with Verizon, cutting $350 million off the final sale price.",
+    "type": "Data Breach",
+    "impact": "3 billion accounts exposed, $350M loss in sale value",
+    "lessons": "The breach went undetected and undisclosed for years, deepening the harm to users. Continuous security monitoring, timely breach disclosure, and using a password manager with unique passwords per site all limit how far a single leak can spread.",
+    "source": "https://medium.com/@mf_senouci/yahoo-data-breach-a-closer-look-at-one-of-the-largest-data-breaches-in-history-1275cbb2a588"
+  },
+  {
+    "year": 2014,
+    "title": "Sony Pictures Hack",
+    "description": "North Korean hackers leaked unreleased films, emails, and employee data.",
+    "story": "State hackers targeted Sony Pictures specifically to punish the studio for producing a comedy film about assassinating their country's leader. They wiped data across Sony's network and leaked unreleased films, embarrassing executive emails, and employee salary details to pressure the studio into pulling the film. Sony's decision to briefly cancel the theatrical release, then reverse course days later, became a landmark case of a cyberattack directly shaping a company's business decisions.",
+    "type": "APT",
+    "impact": "Massive data leak, $80M+ in damages",
+    "lessons": "Attackers moved freely through the internal network once inside, exposing everything from emails to unreleased films. Network segmentation, least-privilege access, and encrypting sensitive internal communications limit how much a single compromised account can expose.",
+    "source": "https://medium.com/@ododo.okpabi/the-movie-they-tried-to-stop-inside-the-sony-pictures-hack-89d097bc874c"
+  },
+  {
+    "year": 2015,
+    "title": "Ukraine Power Grid Attack",
+    "description": "Russian state-linked hackers remotely switched off substations, cutting power to roughly 230,000 people in the dead of winter. It was the first confirmed blackout ever caused by a cyberattack.",
+    "story": "The attackers spent months quietly inside Ukrainian power company networks before flipping breaker switches remotely during a coordinated, multi-substation attack. They also disabled backup systems and jammed customer service phone lines so operators couldn't quickly diagnose or report the outage. It proved, for the first time, that a cyberattack alone could cut off electricity to real homes in winter.",
+    "type": "APT",
+    "impact": "~230,000 people left without power for hours",
+    "lessons": "This attack is often overlooked next to bigger-name breaches, but it proved cyberattacks can physically cut off electricity to real people. Utilities now push for air-gapped backup controls, manual override capability, and strict monitoring of remote-access tools used by grid operators.",
+    "source": "https://medium.com/@aasthathakker/your-antivirus-cant-save-a-power-plant-ot-security-1-1d328c2cfef7"
+  },
+  {
+    "year": 2015,
+    "title": "OPM Breach",
+    "description": "21.5 million US government employees and contractors had their records stolen.",
+    "story": "State-linked hackers targeted the US Office of Personnel Management specifically to build a database of government employees for future espionage and recruitment targeting. They exploited outdated systems and a lack of multi-factor authentication to sit undetected inside the network for nearly a year, quietly copying background-check files containing fingerprints and security-clearance details. The scale of the breach forced a fundamental rethink of how the US government protects employee data.",
+    "type": "Data Breach",
+    "impact": "21.5M records exposed, largest government breach",
+    "lessons": "Outdated legacy systems and weak access controls let attackers quietly harvest highly sensitive background-check data. Regularly retiring legacy systems, enforcing multi-factor authentication for all privileged accounts, and auditing access logs are essential for organizations holding sensitive records.",
+    "source": "https://medium.com/@varonis/opm-breach-report-its-time-for-csos-to-embrace-data-centric-security-232ad1fe5797"
+  },
+  {
+    "year": 2016,
+    "title": "Bangladesh Bank Heist",
+    "description": "Hackers linked to North Korea infiltrated the central bank's systems and used the SWIFT payment network to attempt to steal nearly $1 billion, succeeding in transferring $81 million before a typo alerted investigators.",
+    "story": "The hackers spent months inside Bangladesh Bank's network studying how it used the SWIFT international payment system before attempting to transfer nearly $1 billion to accounts abroad. Most transfers were blocked, but a single misspelled word in one request was what actually tipped off a routing bank and stopped the rest. The stolen $81 million was laundered through casinos and has never been fully recovered.",
+    "type": "APT",
+    "impact": "$81 million stolen, one of the largest bank heists ever",
+    "lessons": "One misspelled word in a fraudulent transfer request stopped what could have been a billion-dollar theft — this attack is far less famous than it should be. Banks now enforce stricter transaction verification, isolate SWIFT terminals from general networks, and require multi-person approval for large transfers.",
+    "source": "https://soso032.medium.com/how-north-korea-robbed-a-bangladesh-bank-of-81-million-dollars-aa1004a75677"
+  },
+  {
+    "year": 2016,
+    "title": "DNC Email Leak",
+    "description": "Russian hackers leaked Democratic National Committee emails during the US presidential election.",
+    "story": "Hackers sent a disguised password-reset email to a senior campaign staffer, who clicked the link and unknowingly handed over his real credentials. From there, attackers spent months quietly copying internal emails before releasing them publicly just before the election. The incident turned a technical phishing attack into one of the most consequential political events of the decade.",
+    "type": "APT",
+    "impact": "Political upheaval, major election interference",
+    "lessons": "A convincing phishing email was enough to compromise high-value accounts. Verifying login-alert emails independently rather than clicking embedded links, and enforcing hardware security keys for sensitive accounts, defeats this kind of targeted phishing.",
+    "source": "https://medium.com/@petergrant_14485/russian-intelligence-the-breach-of-the-democratic-national-committee-and-the-2016-election-61b1080258b4"
+  },
+  {
+    "year": 2017,
+    "title": "WannaCry",
+    "description": "A global ransomware attack that crippled the UK's NHS and affected 150+ countries.",
+    "story": "WannaCry combined ransomware with a leaked government hacking tool, letting it spread automatically between machines on the same network without anyone clicking anything. It hit hospitals, telecoms, and factories in over 150 countries within a single weekend, forcing UK hospitals to turn away patients. A security researcher accidentally found and activated a hidden \"kill switch\" domain in the code, which is the main reason the outbreak didn't spread even further.",
+    "type": "Ransomware",
+    "impact": "$4B+ in damages, 230,000+ computers infected",
+    "lessons": "It spread using a Windows exploit for which a patch had already been released months earlier. Applying security updates promptly, disabling outdated protocols like SMBv1, and maintaining offline backups would have stopped this attack in its tracks.",
+    "source": "https://medium.com/kopfkino/wannacry-the-ransomware-attack-that-shook-the-world-eb8c742c43d1"
+  },
+  {
+    "year": 2017,
+    "title": "NotPetya",
+    "description": "The most destructive cyber attack in history. Cost shipping giant Maersk $300M alone.",
+    "story": "State hackers disguised NotPetya as ransomware, but its real purpose was pure destruction — it was seeded through a hijacked software update and then spread uncontrollably to any connected network worldwide. Companies with no direct connection to the original target were crippled simply because a single infected laptop existed somewhere on their global network. It remains the costliest single cyberattack in history specifically because it was never designed to be undone.",
+    "type": "Ransomware",
+    "impact": "~$10B total damages worldwide",
+    "lessons": "It spread through a compromised software update from a trusted accounting vendor, showing supply-chain trust can be exploited. Verifying software update sources, segmenting networks, and maintaining tested offline backups are the core defenses against this style of attack.",
+    "source": "https://medium.com/kopfkino/notpetya-the-cyber-attack-that-shook-the-world-c02328d4d49"
+  },
+  {
+    "year": 2018,
+    "title": "Cambridge Analytica",
+    "description": "87 million Facebook users' data was harvested for political targeting without consent.",
+    "story": "A researcher built a personality-quiz app that, thanks to loose platform rules at the time, could harvest data not just from people who took the quiz but from all of their friends too. That data was then sold on and used to build psychological profiles for targeted political advertising. The scandal became the defining moment that pushed lawmakers worldwide toward stricter data-privacy regulation.",
+    "type": "Data Breach",
+    "impact": "87M users affected, $5B Facebook fine",
+    "lessons": "A third-party app was allowed excessive access to friends' data through loose platform permissions. Regularly reviewing and revoking third-party app permissions, and platforms limiting what data apps can access by default, prevent this kind of silent over-collection.",
+    "source": "https://thetechtutor.medium.com/the-fall-of-facebook-part-i-6ac2d6a744c5"
+  },
+  {
+    "year": 2018,
+    "title": "Marriott Breach",
+    "description": "500 million guest records were exposed in one of the largest hotel breaches ever.",
+    "story": "The breach actually began years earlier inside a hotel chain's reservation system, before Marriott acquired it and unknowingly inherited the compromised network. Attackers quietly copied guest records including passport numbers for years without detection. Marriott's decision to keep running the vulnerable legacy system post-acquisition, rather than fully auditing and replacing it, is widely cited as the core mistake.",
+    "type": "Data Breach",
+    "impact": "500M records exposed, $123M fine",
+    "lessons": "Attackers had quietly accessed the reservation database for years after a company acquisition, undetected. Thorough security audits during mergers and acquisitions, plus continuous monitoring for unusual database queries, catch intrusions like this far earlier.",
+    "source": "https://medium.com/@paradigmitcyber/the-2018-marriott-starwood-data-breach-a5c14e86b371"
+  },
+  {
+    "year": 2019,
+    "title": "Baltimore City Ransomware",
+    "description": "The city of Baltimore refused to pay a roughly $76,000 ransom after a RobbinHood ransomware attack froze government systems, only to spend an estimated $18 million recovering email, payments, and property services.",
+    "story": "Attackers exploited an unpatched Windows vulnerability to lock down virtually every city computer system at once, from email to property tax payments. City officials made the deliberate decision to refuse the ransom on principle, partly following FBI guidance against paying criminals. That decision ended up costing the city roughly $18 million in recovery and lost revenue, a number regularly cited in the ongoing debate over whether ransoms should ever be paid.",
+    "type": "Ransomware",
+    "impact": "$18M+ recovery cost against a $76,000 ransom demand",
+    "lessons": "This is a favorite case study among security professionals because it shows how cheap an attack can be for criminals versus how expensive recovery is for victims. Regularly tested backups, network segmentation, and a rehearsed incident-response plan turn a ransomware attack from a citywide crisis into a manageable inconvenience.",
+    "source": "https://elliotmtg.medium.com/done-enjoy-buddy-the-2019-baltimore-ransomware-attack-d56cde869d70"
+  },
+  {
+    "year": 2019,
+    "title": "Capital One Breach",
+    "description": "A former AWS employee stole 106 million customer records from the bank.",
+    "story": "A former cloud employee exploited a misconfigured firewall in Capital One's cloud infrastructure that she had inside knowledge of from her previous job. She used the flaw to trick the server into revealing security credentials, then used those to pull data directly from cloud storage. She was caught only after boasting about the hack publicly online, highlighting how even accidental self-disclosure remains a common way attackers get caught.",
+    "type": "Data Breach",
+    "impact": "106M records exposed, $80M fine",
+    "lessons": "A misconfigured cloud firewall let an insider with prior cloud experience pull data directly from storage. Properly configuring cloud security groups, applying least-privilege access, and auditing cloud storage permissions regularly prevent this exact misconfiguration.",
+    "source": "https://root-vaibhav.medium.com/the-2019-capital-one-breach-how-ignored-warnings-and-cloud-misconfigurations-opened-the-door-to-1f57fbea527f"
+  },
+  {
+    "year": 2020,
+    "title": "SolarWinds",
+    "description": "The largest software supply-chain attack. Russian hackers compromised 18,000+ customers through a backdoor.",
+    "story": "State hackers compromised SolarWinds' software build system and quietly inserted malicious code into a legitimate update for its network-monitoring product. Roughly 18,000 organizations installed the tainted update without any way to know it was compromised, since it was digitally signed and delivered through the company's official channel. The attack went undetected for months and forced a fundamental rethink of how much organizations should trust their software supply chain.",
+    "type": "Supply Chain",
+    "impact": "18,000+ organizations affected, $100M+ in cleanup",
+    "lessons": "Malicious code was inserted directly into a trusted software update, infecting every customer who installed it. Software supply-chain verification, signed updates, and monitoring for unusual outbound traffic from trusted applications are now standard defenses.",
+    "source": "https://medium.com/@er.mdyousufhussain/18-000-networks-hacked-how-solarwinds-compromised-global-security-a00fdee57d6d"
+  },
+  {
+    "year": 2021,
+    "title": "Colonial Pipeline Ransomware",
+    "description": "A ransomware attack forced the shutdown of a major US fuel pipeline, causing panic buying.",
+    "story": "A ransomware group got in through a single compromised VPN password that had no multi-factor authentication and appeared to be reused from a previous, unrelated breach. Colonial Pipeline made the decision to proactively shut down the entire pipeline themselves, even though the ransomware had only hit business IT systems, out of caution about it spreading further. That shutdown caused fuel shortages and panic buying across the US East Coast, and the company ultimately paid a $4.4 million ransom, part of which was later recovered.",
+    "type": "Ransomware",
+    "impact": "Fuel supply disrupted, $4.4M ransom paid",
+    "lessons": "A single compromised password without multi-factor authentication gave attackers a foothold into critical infrastructure. Enforcing multi-factor authentication on every remote access point, especially for critical infrastructure, remains the single biggest lesson here.",
+    "source": "https://medium.com/@rajkaneriya40/the-colonial-pipeline-ransomware-attack-of-2021-81050f82f73b"
+  },
+  {
+    "year": 2021,
+    "title": "Log4j Vulnerability",
+    "description": "A critical zero-day vulnerability in a popular logging library that affected millions of systems worldwide.",
+    "story": "A researcher discovered that Log4j, a logging tool embedded inside an enormous share of the world's Java software, could be tricked into running attacker-supplied code with nothing more than a specially crafted text string. Because Log4j was buried so many layers deep inside other software, many organizations didn't even know they were using it, let alone that it needed patching. The scramble to find and fix it became one of the largest coordinated security responses in internet history.",
+    "type": "Other",
+    "impact": "Millions of systems at risk, unprecedented response",
+    "lessons": "A flaw buried deep in a widely used open-source library affected countless applications that depended on it. Maintaining a software bill of materials, tracking dependencies, and patching third-party libraries quickly are now essential practices for any organization.",
+    "source": "https://medium.com/geekculture/the-log4j-incident-explained-ed0ce6d36df2"
+  },
+  {
+    "year": 2022,
+    "title": "Uber Breach",
+    "description": "A teenager gained full access to Uber's internal systems and announced it on Twitter.",
+    "story": "An 18-year-old attacker used social engineering, repeatedly messaging an Uber contractor pretending to be IT support, until the exhausted employee finally approved a multi-factor login request just to make the notifications stop. Once inside, the attacker found admin credentials for critical internal tools left in a shared file and posted screenshots on Uber's own internal chat announcing the breach. The incident is now a standard example of how MFA fatigue attacks can bypass even strong technical defenses.",
+    "type": "Data Breach",
+    "impact": "Internal systems compromised, major reputational damage",
+    "lessons": "A social-engineering trick convinced an employee to approve a fraudulent multi-factor login request. Training employees to reject unexpected MFA prompts, using number-matching or hardware keys instead of simple push approvals, closes this exact gap.",
+    "source": "https://medium.com/@allypetitt/how-did-an-18-year-old-hack-uber-788f092b9dc3"
+  },
+  {
+    "year": 2023,
+    "title": "Clorox Ransomware",
+    "description": "A ransomware attack caused $50+ million in losses and disrupted production for months.",
+    "story": "Attackers used social engineering against Clorox's IT help desk to reset an employee's credentials and gain a foothold into the network. Because IT and manufacturing systems weren't fully separated, the resulting ransomware attack didn't just steal data, it forced factories to fall back to slower manual processes, causing real product shortages on store shelves for months. The attack is regularly cited as proof that cyberattacks can now directly disrupt physical, everyday goods.",
+    "type": "Ransomware",
+    "impact": "$50M+ in losses, production disruptions",
+    "lessons": "Operational technology and business networks were not fully separated, letting the attack disrupt actual manufacturing. Segmenting IT from operational systems and maintaining a tested disaster-recovery plan minimize how far a ransomware infection can spread into physical operations.",
+    "source": "https://medium.com/@tahirbalarabe2/clorox-sues-cognizant-over-cyberattack-negligence-f90f3bf5df79"
+  },
+  {
+    "year": 2024,
+    "title": "Change Healthcare Ransomware",
+    "description": "The biggest healthcare hack in US history. Disrupted payments and patient care nationwide.",
+    "story": "A ransomware group got in through a remote access account that had no multi-factor authentication enabled. Because Change Healthcare processes a huge share of US medical billing and prescriptions, the resulting outage rippled across the entire healthcare system, leaving pharmacies unable to process claims and some patients unable to get medication. The company's decision to pay the reported ransom drew heavy criticism, especially after some stolen data leaked anyway.",
+    "type": "Ransomware",
+    "impact": "$872M impact, nationwide healthcare disruption",
+    "lessons": "A single set of compromised credentials without multi-factor authentication brought down a system core to national healthcare payments. Given how much of healthcare now depends on a handful of processors, redundancy, MFA everywhere, and regular incident-response drills are non-negotiable.",
+    "source": "https://medium.com/@digitalworldvision.com/change-healthcare-ransomware-attack-blackcat-0958380838dd"
+  },
+  {
+    "year": 2025,
+    "title": "Operation ENDGAME",
+    "description": "The largest ever international operation against botnets and cybercriminal infrastructure.",
+    "story": "Rather than reacting to a single attack, this was a proactive, coordinated law enforcement decision across multiple countries to systematically dismantle the infrastructure ransomware gangs rely on to spread. Investigators seized servers, froze cryptocurrency, and identified operators across the globe in one synchronized operation instead of piecemeal takedowns. It represents a shift toward treating cybercrime infrastructure as a target in its own right, not just individual attacks.",
+    "type": "Other",
+    "impact": "Major botnet takedown, arrests across multiple countries",
+    "lessons": "This was a rare case of defenders coordinating across countries to dismantle attacker infrastructure at scale. It is a reminder that keeping personal devices free of malware (via updates and reputable antivirus) also starves the botnets that criminal operations depend on.",
+    "source": "https://medium.com/@scottbolen/operation-endgame-how-the-november-2025-takedown-disrupted-the-cybercrime-supply-chain-40487651522c"
+  },
+  {
+    "year": 2025,
+    "title": "Marks & Spencer Cyberattack",
+    "description": "Attackers used social engineering against the retailer's IT service desk to reset credentials and gain entry, then deployed ransomware that crippled online orders, click-and-collect, and contactless payments for weeks.",
+    "story": "Attackers called the retailer's IT help desk pretending to be a locked-out employee and talked their way into a password reset. That single social-engineering call gave them enough access to eventually deploy ransomware across core systems. The decision to take systems offline to contain the damage meant weeks without online orders, a trade-off between short-term sales loss and preventing a far larger breach.",
+    "type": "Ransomware",
+    "impact": "Roughly £300M profit hit, market value fell over £700M",
+    "lessons": "The breach began not with a technical exploit but with attackers simply talking their way past a help desk employee. Verifying identity through multiple independent channels before any password reset, and training service-desk staff specifically to resist social engineering, closes this gap.",
+    "source": "https://medium.com/@tahirbalarabe2/scattered-spider-behind-marks-spencer-cyberattack-1221d94cc645"
+  },
+  {
+    "year": 2025,
+    "title": "Jaguar Land Rover Cyberattack",
+    "description": "A ransomware-style attack forced the UK's biggest carmaker to shut down its IT systems and halt production for five weeks, disrupting roughly 5,000 businesses in its supply chain and requiring a government-backed loan to stay afloat.",
+    "story": "A financially motivated criminal group broke into Jaguar Land Rover's network, and upon detection, JLR made the drastic decision to proactively shut down its own IT and manufacturing systems worldwide to contain the threat. That decision, while limiting the breach, meant factories couldn't build cars for five weeks, since modern car manufacturing is almost entirely computer-coordinated. The scale of the shutdown eventually required a UK government-backed loan just to keep JLR's supply chain of smaller businesses from collapsing.",
+    "type": "Ransomware",
+    "impact": "£1.9B total estimated cost, most damaging cyberattack in UK history",
+    "lessons": "A single intrusion cascaded through tens of thousands of supply-chain jobs, showing how deeply manufacturing now depends on IT uptime. Isolating production networks from corporate IT, maintaining offline manufacturing fallback procedures, and carrying cyber insurance all reduce this kind of cascading damage.",
+    "source": "https://medium.com/@lordsonjabez753/inside-the-jaguar-land-rover-cyber-incident-a-soc-analysts-view-dd5b317146c4"
+  },
+  {
+    "year": 2026,
+    "title": "Foxconn Ransomware Breach",
+    "description": "The Nitrogen ransomware group claimed to have stolen 8 terabytes of data from Foxconn's North American factories, including schematics and project files tied to major clients like Apple, Dell, Google, and Nvidia.",
+    "story": "The ransomware group claims to have breached Foxconn's North American factory networks and stolen terabytes of manufacturing data tied to major clients rather than just Foxconn's own information. Because contract manufacturers like Foxconn build products for many different tech companies at once, a single breach risks exposing confidential designs from several unrelated brands simultaneously. The incident is still unfolding, but it highlights how supply-chain manufacturers have become high-value targets precisely because of who they build for.",
+    "type": "Ransomware",
+    "impact": "8TB of sensitive data claimed stolen, major client exposure risk",
+    "lessons": "Because Foxconn manufactures for so many large tech brands, one breach threatened to expose confidential designs from several companies at once. Strict data segregation between different clients' projects, and requiring contract manufacturers to meet the same security bar as the brands they serve, limits this kind of blast radius."
+  }
+];

@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #0a0f1a;
+  --bg-secondary: #0d1420;
+  --bg-card: #101a26;
+  --bg-card-hover: #142230;
+  --text-primary: #f3f5f8;
+  --text-secondary: #a9b4c2;
+  --text-muted: #6b7889;
+  --accent: #4a8cf7;
+  --accent-hover: #6aa3ff;
+  --accent-cyan: #38bdf8;
+  --accent-amber: #e8a06a;
+  --border-color: rgba(255, 255, 255, 0.08);
+  --scroll-progress: 0;
+}
+
+.light {
+  --bg-primary: #f4f6fa;
+  --bg-secondary: #e8ecf2;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0f2f7;
+  --text-primary: #0b0e14;
+  --text-secondary: #4a5a72;
+  --text-muted: #8a9bb0;
+  --border-color: #d0d8e4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background 0.4s ease, color 0.4s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+.glass-card {
+  background: color-mix(in srgb, var(--bg-card) 88%, transparent);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(16px) saturate(1.4);
+}
+
+/* ===== Aurora scroll-reactive background ===== */
+.aurora-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.8;
+  filter: hue-rotate(calc(var(--scroll-progress, 0) * 45deg));
+  transition: opacity 0.4s ease;
+}
+
+.light .aurora-bg {
+  opacity: 0.35;
+}
+
+.aurora-layer {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.aurora-layer span {
+  position: absolute;
+  width: 55vw;
+  height: 55vw;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
+  mix-blend-mode: screen;
+}
+
+.aurora-layer:nth-child(1) span {
+  top: -15%;
+  left: -10%;
+  background: radial-gradient(circle, rgba(74, 140, 247, 0.35), transparent 70%);
+  animation: auroraDrift1 26s ease-in-out infinite;
+}
+
+.aurora-layer:nth-child(2) span {
+  top: 20%;
+  right: -15%;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.28), transparent 70%);
+  animation: auroraDrift2 32s ease-in-out infinite;
+}
+
+.aurora-layer:nth-child(3) span {
+  bottom: -20%;
+  left: 20%;
+  width: 45vw;
+  height: 45vw;
+  background: radial-gradient(circle, rgba(232, 160, 106, 0.16), transparent 70%);
+  animation: auroraDrift3 38s ease-in-out infinite;
+}
+
+@keyframes auroraDrift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(8vw, 6vh) scale(1.12); }
+}
+@keyframes auroraDrift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-7vw, 9vh) scale(1.08); }
+}
+@keyframes auroraDrift3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(6vw, -8vh) scale(1.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-bg { filter: none; }
+  .aurora-layer span { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* Custom range/select chrome resets some browsers need */
+select {
+  color-scheme: light dark;
+}
