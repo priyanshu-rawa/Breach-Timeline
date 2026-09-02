@@ -3,7 +3,7 @@
 <h1 align="center">Cyber Attack Timeline</h1>
 
 <p align="center">
-  <strong>36 real cyberattacks. 5 decades. Told like stories, not spreadsheets.</strong><br>
+  <strong>35 real cyberattacks. 5 decades. Told like stories, not spreadsheets.</strong><br>
   From the very first internet worm in 1988 to the Foxconn ransomware attack in 2026 — explained simply, so anyone can understand what actually happened and why it matters.
 </p>
 
@@ -23,17 +23,17 @@
   <img src="https://img.shields.io/github/issues/priyanshu-rawa/Breach-Timeline?style=flat-square&color=informational&labelColor=0a0f1a" alt="GitHub Issues">
   <img src="https://img.shields.io/github/license/priyanshu-rawa/Breach-Timeline?style=flat-square&color=success&labelColor=0a0f1a" alt="License">
   <img src="https://img.shields.io/github/last-commit/priyanshu-rawa/Breach-Timeline?style=flat-square&labelColor=0a0f1a" alt="Last Commit">
-  <img src="https://img.shields.io/badge/dependencies-zero%20build%20step-black?style=flat-square&labelColor=0a0f1a" alt="No Build Step">
-  <img src="https://img.shields.io/badge/made%20with-HTML%20%7C%20CSS%20%7C%20JS-blueviolet?style=flat-square&labelColor=0a0f1a" alt="Vanilla Stack">
+  <img src="https://img.shields.io/badge/type--safe-100%25-black?style=flat-square&labelColor=0a0f1a" alt="Type Safe">
   <img src="https://img.shields.io/badge/PRs-welcome-brightgreen?style=flat-square&labelColor=0a0f1a" alt="PRs Welcome">
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white" alt="HTML5">
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white" alt="CSS3">
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black" alt="JavaScript">
-  <img src="https://img.shields.io/badge/GSAP-88CE02?style=flat-square&logo=greensock&logoColor=white" alt="GSAP">
-  <img src="https://img.shields.io/badge/GitHub_Pages-222222?style=flat-square&logo=github&logoColor=white" alt="GitHub Pages">
+  <img src="https://img.shields.io/badge/Next.js_16-000000?style=flat-square&logo=next.js&logoColor=white" alt="Next.js">
+  <img src="https://img.shields.io/badge/React_19-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" alt="Tailwind CSS">
+  <img src="https://img.shields.io/badge/Framer_Motion-0055FF?style=flat-square&logo=framer&logoColor=white" alt="Framer Motion">
+  <img src="https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white" alt="Vercel">
 </p>
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:4a8cf7,100:38bdf8&height=3&width=1000" width="100%"/>
@@ -41,7 +41,7 @@
 > **You don't need to be a hacker or a security expert to enjoy this. If you've ever been curious about how the internet's biggest break-ins happened, this is for you.**
 
 <p align="center">
-  <img src="assets/screenshot.png" alt="Breach Timeline Screenshot" width="100%">
+  <img src="public/screenshot.png" alt="Breach Timeline Screenshot" width="100%">
 </p>
 
 ---
@@ -70,7 +70,7 @@
 
 No downloads. No account. No email asked. No tracking in the background.
 
-Just click the link, type in an attack you've heard of (or haven't), filter by decade if you're in the mood for a specific era, and tap any card to read the full story — written so it's actually enjoyable to read, not something you skim and forget.
+Just click the link, type in an attack you've heard of (or haven't), filter by decade or attack type if you're in the mood for a specific era, and tap any card to read the full story — written so it's actually enjoyable to read, not something you skim and forget.
 
 ---
 
@@ -92,17 +92,18 @@ Here's the part that matters most, though: the tricks behind these massive, head
 
 ## 🛠️ What It's Built With
 
-No frameworks, no heavy setup — just clean, simple code that anyone learning to code can actually read and follow.
+The site started as plain HTML/CSS/JS and has since been rebuilt on Next.js for faster loads, real type safety, and a component structure that's actually easy to extend.
 
 | | |
 |---|---|
-| 🧱 **Structure & Design** | Plain HTML5 and hand-written CSS3 — no Tailwind, no build tools, nothing fancy to install |
-| ⚡ **Interactivity** | Plain JavaScript — no React, no Vue, nothing extra to learn first |
-| 🎬 **Smooth Animations** | [GSAP](https://gsap.com/) handles the scroll animations, [Lenis](https://lenis.darkroom.engineering/) makes scrolling feel buttery smooth |
-| 🎨 **Icons & Fonts** | Font Awesome for icons, Google Fonts for typography |
-| ☁️ **Where It Lives** | A static site hosted on GitHub Pages — no server, no database, nothing that can break |
+| 🧱 **Framework** | [Next.js 16](https://nextjs.org/) (App Router, Turbopack) on [React 19](https://react.dev/) |
+| 🔒 **Type Safety** | [TypeScript](https://www.typescriptlang.org/) — every attack, FAQ, and tip is a typed data record, not a loose JSON blob |
+| 🎨 **Styling** | [Tailwind CSS](https://tailwindcss.com/) with a small custom design system (aurora background, dark/light themes via [next-themes](https://github.com/pacocoursey/next-themes)) |
+| 🎬 **Animation** | [Framer Motion](https://www.framer.com/motion/) for staggered reveals, the animated stats chart, and the scroll progress bar |
+| 🎨 **Icons & Fonts** | [Lucide](https://lucide.dev/) for icons, Google Fonts (via `next/font`) for typography |
+| ☁️ **Where It Lives** | Deployed on [Vercel](https://vercel.com/) as a fully static, prerendered site — no database, no API routes, nothing that can break |
 
-No build step. No `npm install`. Just open `index.html` in your browser and it works, right away.
+One `npm install`, one `npm run dev`. No config to hand-edit before it runs.
 
 ---
 
@@ -111,42 +112,64 @@ No build step. No `npm install`. Just open `index.html` in your browser and it w
 ```text
 Breach-Timeline/
 │
-├── assets/
+├── public/
 │   └── screenshot.png
 │
-├── index.html
-├── style.css
-├── script.js
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx        # root layout, fonts, theme provider
+│   │   ├── page.tsx           # assembles all sections
+│   │   └── globals.css        # design tokens, aurora background
+│   │
+│   ├── components/            # Hero, Navbar, Filters, Timeline,
+│   │                           # TimelineCard, StatsChart, Tips,
+│   │                           # Protect, Faq, Footer, etc.
+│   │
+│   ├── data/                  # typed attack, FAQ, and tip records
+│   │   ├── attacks.ts
+│   │   ├── faqs.ts
+│   │   ├── protect.ts
+│   │   └── tips.tsx
+│   │
+│   └── lib/
+│       └── utils.ts
+│
+├── package.json
+├── tailwind.config.ts
+├── tsconfig.json
 ├── README.md
 └── LICENSE
 ```
 
-Just three real files. No confusing build pipeline to figure out — open any file, read it top to bottom, and you'll understand exactly what it's doing.
+Every section on the page is its own component under `src/components/`, and every piece of content lives in a typed file under `src/data/` — so adding a new attack means editing one array, not hunting through HTML.
 
 ---
 
 ## ⚡ Run It On Your Own Computer
 
-Clone it, open it, done. That's genuinely the whole process.
-
 ```bash
 git clone https://github.com/priyanshu-rawa/Breach-Timeline.git
 cd Breach-Timeline
+
+npm install
+npm run dev
 ```
 
-From here, you can just double-click `index.html` to open it in your browser. Or, if you'd rather run it through a local server:
+Then open `http://localhost:3000` in your browser.
+
+Other useful commands:
 
 ```bash
-python -m http.server 8000
+npm run build   # production build
+npm run start   # serve the production build locally
+npm run lint    # run ESLint
 ```
-
-Then head to `http://localhost:8000` in your browser. No installs, no config files to edit — just a browser and two minutes.
 
 ---
 
 ## 📚 What You'll Find Inside
 
-Five decades of history. 36 real incidents, each one explained in plain language.
+Five decades of history. 35 real incidents, each one explained in plain language.
 
 <div align="center">
 
@@ -171,8 +194,10 @@ You genuinely don't need to be an expert to contribute — this project gets bet
 ```bash
 git clone https://github.com/YOUR-USERNAME/Breach-Timeline.git
 cd Breach-Timeline
+npm install
 
 git checkout -b improve-timeline
+# make your changes
 git add .
 git commit -m "Improve timeline information"
 git push origin improve-timeline
@@ -180,15 +205,15 @@ git push origin improve-timeline
 
 Once you're ready, open a pull request. Here are a few easy ways to help:
 
-- Spot a major breach that's missing? Add it.
+- Spot a major breach that's missing? Add it to `src/data/attacks.ts`.
 - Notice a date or detail that's gone out of date? Fix it.
 - Have an eye for accessibility or mobile design? Improve it.
-- Know how to make an animation feel smoother? Refine it.
+- Know how to make an animation feel smoother? Refine it in the relevant component.
 - Found a typo or a confusing sentence in these docs? Clean it up.
 
 Not sure if your idea's a good fit? Open an issue first and ask — that's always welcome, no question is too small.
 
-A few friendly guidelines before you submit a pull request: keep your changes focused on one thing at a time, try to match the existing visual style, avoid adding new dependencies unless there's a real need for them, test your changes on both desktop and mobile, and write clear commit messages. If you're adding a historical fact, please link a reliable source for it. The whole point of this project is to stay simple and easy for the next person to learn from — let's keep it that way.
+A few friendly guidelines before you submit a pull request: keep your changes focused on one thing at a time, try to match the existing visual style, run `npm run build` before pushing to make sure nothing's broken, avoid adding new dependencies unless there's a real need for them, test your changes on both desktop and mobile, and write clear commit messages. If you're adding a historical fact, please link a reliable source for it. The whole point of this project is to stay simple and easy for the next person to learn from — let's keep it that way.
 
 ---
 
