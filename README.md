@@ -3,8 +3,8 @@
 <h1 align="center">Cyber Attack Timeline</h1>
 
 <p align="center">
-  <strong>35 real cyberattacks. 5 decades. Told like stories, not spreadsheets.</strong><br>
-  From the very first internet worm in 1988 to the Foxconn ransomware attack in 2026 — explained simply, so anyone can understand what actually happened and why it matters.
+  <strong>35 real cyberattacks, 5 decades, told like stories instead of spreadsheets.</strong><br>
+  From the first internet worm in 1988 to the Foxconn ransomware attack in 2026, explained plainly so anyone can follow what happened and why it mattered.
 </p>
 
 <div align="center">
@@ -38,7 +38,7 @@
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:4a8cf7,100:38bdf8&height=3&width=1000" width="100%"/>
 
-> **You don't need to be a hacker or a security expert to enjoy this. If you've ever been curious about how the internet's biggest break-ins happened, this is for you.**
+> You don't need to be a hacker or a security expert to enjoy this. If you've ever been curious how the internet's biggest break-ins actually happened, it's for you.
 
 <p align="center">
   <img src="public/screenshot.png" alt="Breach Timeline Screenshot" width="100%">
@@ -47,67 +47,64 @@
 ---
 
 <details>
-<summary><b>📑 Table of Contents</b></summary>
+<summary><b>Table of contents</b></summary>
 <br>
 
-- [🚀 Try It Right Now](#-try-it-right-now)
-- [💡 Why I Made This](#-why-i-made-this)
-- [🛠️ What It's Built With](#%EF%B8%8F-what-its-built-with)
-- [📁 Inside the Project](#-inside-the-project)
-- [⚡ Run It On Your Own Computer](#-run-it-on-your-own-computer)
-- [📚 What You'll Find Inside](#-what-youll-find-inside)
-- [🤝 Want to Help?](#-want-to-help)
-- [📄 License](#-license)
-- [👤 Who Made This](#-who-made-this)
+- [Try it right now](#try-it-right-now)
+- [Why I made this](#why-i-made-this)
+- [What it's built with](#what-its-built-with)
+- [Inside the project](#inside-the-project)
+- [Run it on your own computer](#run-it-on-your-own-computer)
+- [What you'll find inside](#what-youll-find-inside)
+- [Want to help?](#want-to-help)
+- [License](#license)
+- [Who made this](#who-made-this)
 
 </details>
 
 ---
 
-## 🚀 Try It Right Now
+## Try it right now
 
-**[👉 Open Breach Timeline](https://breach-timeline-kappa.vercel.app/)**
+**[Open Breach Timeline](https://breach-timeline-kappa.vercel.app/)**
 
-No downloads. No account. No email asked. No tracking in the background.
+No downloads, no account, no email, nothing tracking you in the background.
 
-Just click the link, type in an attack you've heard of (or haven't), filter by decade or attack type if you're in the mood for a specific era, and tap any card to read the full story — written so it's actually enjoyable to read, not something you skim and forget.
+Click the link, search for an attack you've heard of (or haven't), filter by decade or attack type if you're in the mood for a specific era, and tap a card to read the full story. It's written to actually hold your attention, not something you skim once and forget.
 
 ---
 
-## 💡 Why I Made This
+## Why I made this
 
-I'm not a cybersecurity expert. I'm self-taught, learning the way most people actually learn this stuff — one write-up at a time, usually at 1 AM, falling down a Google rabbit hole because one article led to another.
+I'm not a cybersecurity expert. I'm self-taught, learning it the way most people actually do: one write-up at a time, usually at 1 AM, falling down a rabbit hole because one article linked to another.
 
-And I kept hitting the same wall over and over: the history of cyberattacks is genuinely one of the most interesting parts of this whole field, but almost nothing about it is written for someone who's just starting out. It's scattered across a thousand technical blogs, dense Wikipedia pages, and YouTube videos that assume you already know half the vocabulary.
+I kept hitting the same wall. The history of cyberattacks is one of the more interesting corners of this field, but almost nothing about it is written for someone just starting out. It's scattered across dense Wikipedia pages, technical blogs, and YouTube videos that assume you already know half the vocabulary.
 
-So I decided to build the thing I wish existed when I was starting out.
+So I built the thing I wish existed when I was starting.
 
-Not a boring list of dates. Something you can actually sit down with — search for an attack, filter it, open a card, and find out *why* the Morris Worm even happened, *how* Stuxnet managed to physically destroy machinery from across the internet, and *what one small decision* turned the Colonial Pipeline hack into a country-wide fuel shortage.
+Not a list of dates. Something you sit down with: search for an attack, open a card, and find out why the Morris Worm happened, how Stuxnet managed to physically destroy machinery from across the internet, and what one small decision turned the Colonial Pipeline hack into a country-wide fuel shortage.
 
-Here's the part that matters most, though: the tricks behind these massive, headline-making attacks are the exact same tricks used against regular, everyday people all the time — phishing emails, reused passwords, skipped software updates, weak or missing two-factor authentication. Once you understand how the "big ones" happened, you start noticing the same warning signs in your own inbox.
+Here's the part that matters most: the tricks behind these headline attacks are the same ones used against ordinary people every day, phishing emails, reused passwords, skipped updates, missing two-factor authentication. Once you know how the big ones happened, you start noticing the same warning signs in your own inbox.
 
-**You do not need a technical background to enjoy this site, and you don't need one to read this page either.** If a word or a term trips you up while you're reading, treat that as a little nudge to go look it up — not a sign that this isn't meant for you. Everyone starts somewhere, and this handbook was built with exactly that person in mind.
+You don't need a technical background to enjoy this site, and you don't need one to read this page either. If a term trips you up while reading, treat it as a nudge to go look it up, not a sign this isn't for you. Everyone starts somewhere.
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:38bdf8,100:4a8cf7&height=3&width=1000" width="100%"/>
 
-## 🛠️ What It's Built With
+## What it's built with
 
-The site started as plain HTML/CSS/JS and has since been rebuilt on Next.js for faster loads, real type safety, and a component structure that's actually easy to extend.
+The site started as plain HTML, CSS, and JS, then got rebuilt on Next.js for faster loads, real type safety, and a component structure that's actually easy to extend.
 
-| | |
-|---|---|
-| 🧱 **Framework** | [Next.js 16](https://nextjs.org/) (App Router, Turbopack) on [React 19](https://react.dev/) |
-| 🔒 **Type Safety** | [TypeScript](https://www.typescriptlang.org/) — every attack, FAQ, and tip is a typed data record, not a loose JSON blob |
-| 🎨 **Styling** | [Tailwind CSS](https://tailwindcss.com/) with a small custom design system (aurora background, dark/light themes via [next-themes](https://github.com/pacocoursey/next-themes)) |
-| 🎬 **Animation** | [Framer Motion](https://www.framer.com/motion/) for staggered reveals, the animated stats chart, and the scroll progress bar |
-| 🎨 **Icons & Fonts** | [Lucide](https://lucide.dev/) for icons, Google Fonts (via `next/font`) for typography |
-| ☁️ **Where It Lives** | Deployed on [Vercel](https://vercel.com/) as a fully static, prerendered site — no database, no API routes, nothing that can break |
+Next.js 16 (App Router, Turbopack) runs on React 19. TypeScript covers the whole data layer, every attack, FAQ, and tip is a typed record instead of a loose JSON blob. Styling is Tailwind CSS with a small custom design system: an aurora background that reacts to scroll position, and dark/light themes via next-themes.
 
-One `npm install`, one `npm run dev`. No config to hand-edit before it runs.
+Motion runs on Framer Motion throughout, not just as decoration on a few cards. The hero fades and scales as you scroll past it, timeline cards settle in with spring physics instead of a flat fade, the navbar picks up a shadow only once you've actually scrolled, and every reveal across the page shares one tuned spring so the whole scroll feels like a single continuous motion instead of a pile of separate effects. Icons come from Lucide, fonts load through next/font.
+
+It deploys to Vercel as a fully static, prerendered site: no database, no API routes, no server code that can be broken into.
+
+One `npm install`, one `npm run dev`. Nothing to hand-configure before it runs.
 
 ---
 
-## 📁 Inside the Project
+## Inside the project
 
 ```text
 Breach-Timeline/
@@ -132,7 +129,8 @@ Breach-Timeline/
 │   │   └── tips.tsx
 │   │
 │   └── lib/
-│       └── utils.ts
+│       ├── utils.ts           # decade math, badge colors, icon lookup
+│       └── motion.ts           # shared spring presets for scroll animation
 │
 ├── package.json
 ├── tailwind.config.ts
@@ -141,11 +139,11 @@ Breach-Timeline/
 └── LICENSE
 ```
 
-Every section on the page is its own component under `src/components/`, and every piece of content lives in a typed file under `src/data/` — so adding a new attack means editing one array, not hunting through HTML.
+Every section on the page is its own component under `src/components/`, and every piece of content lives in a typed file under `src/data/`. Adding a new attack means editing one array, not hunting through HTML.
 
 ---
 
-## ⚡ Run It On Your Own Computer
+## Run it on your own computer
 
 ```bash
 git clone https://github.com/priyanshu-rawa/Breach-Timeline.git
@@ -167,29 +165,29 @@ npm run lint    # run ESLint
 
 ---
 
-## 📚 What You'll Find Inside
+## What you'll find inside
 
-Five decades of history. 35 real incidents, each one explained in plain language.
+Five decades of history, 35 real incidents, each one explained in plain language.
 
 <div align="center">
 
-| Decade | Attacks Covered |
+| Decade | Attacks covered |
 |:------:|:---------:|
-| 🕹️ 1980s | 2 |
-| 💾 1990s | 2 |
-| 🌐 2000s | 6 |
-| 📱 2010s | 15 |
-| ☁️ 2020s | 10 |
+| 1980s | 2 |
+| 1990s | 2 |
+| 2000s | 6 |
+| 2010s | 15 |
+| 2020s | 10 |
 
 </div>
 
-It starts all the way back with the Morris Worm, the AIDS Trojan, and the Melissa Virus — some of the earliest cyberattacks in history. From there it moves into Stuxnet (which physically destroyed nuclear centrifuges), WannaCry and NotPetya (two of the most damaging ransomware outbreaks ever), and the SolarWinds attack, which changed how the entire security industry thinks about trust in software supply chains. It closes out right up to 2025 and 2026, covering the Marks & Spencer, Jaguar Land Rover, and Foxconn breaches.
+It starts back with the Morris Worm, the AIDS Trojan, and the Melissa Virus, some of the earliest cyberattacks on record. From there it moves into Stuxnet, which physically destroyed nuclear centrifuges, WannaCry and NotPetya, two of the most damaging ransomware outbreaks ever, and the SolarWinds attack, which changed how the entire security industry thinks about trust in software supply chains. It closes out with 2025 and 2026, covering the Marks & Spencer, Jaguar Land Rover, and Foxconn breaches.
 
 <img src="https://capsule-render.vercel.app/api?type=rect&color=0:4a8cf7,100:38bdf8&height=3&width=1000" width="100%"/>
 
-## 🤝 Want to Help?
+## Want to help?
 
-You genuinely don't need to be an expert to contribute — this project gets better every single time someone points out something I missed or explains it better than I did.
+You don't need to be an expert to contribute. This project gets better whenever someone points out something I missed or explains it better than I did.
 
 ```bash
 git clone https://github.com/YOUR-USERNAME/Breach-Timeline.git
@@ -203,33 +201,33 @@ git commit -m "Improve timeline information"
 git push origin improve-timeline
 ```
 
-Once you're ready, open a pull request. Here are a few easy ways to help:
+Once you're ready, open a pull request. A few easy ways to help:
 
 - Spot a major breach that's missing? Add it to `src/data/attacks.ts`.
-- Notice a date or detail that's gone out of date? Fix it.
-- Have an eye for accessibility or mobile design? Improve it.
-- Know how to make an animation feel smoother? Refine it in the relevant component.
+- Notice a date or detail that's gone stale? Fix it.
+- Have an eye for accessibility or mobile layout? Improve it.
+- Know how to make an animation feel smoother? Refine it in the relevant component, and reuse the presets in `src/lib/motion.ts` if you can instead of inventing a new one.
 - Found a typo or a confusing sentence in these docs? Clean it up.
 
-Not sure if your idea's a good fit? Open an issue first and ask — that's always welcome, no question is too small.
+Not sure if your idea's a good fit? Open an issue first and ask. That's welcome, no question is too small.
 
-A few friendly guidelines before you submit a pull request: keep your changes focused on one thing at a time, try to match the existing visual style, run `npm run build` before pushing to make sure nothing's broken, avoid adding new dependencies unless there's a real need for them, test your changes on both desktop and mobile, and write clear commit messages. If you're adding a historical fact, please link a reliable source for it. The whole point of this project is to stay simple and easy for the next person to learn from — let's keep it that way.
+A few guidelines before you submit a pull request: keep changes focused on one thing at a time, match the existing visual style, run `npm run build` before pushing to make sure nothing's broken, avoid adding new dependencies unless there's a real need, test on both desktop and mobile, and write clear commit messages. If you're adding a historical fact, link a reliable source for it. The point of this project is to stay simple and easy for the next person to learn from.
 
 ---
 
-## 📄 License
+## License
 
 This project is open source. Check the [LICENSE](LICENSE) file for the full details.
 
 ---
 
-## 👤 Who Made This
+## Who made this
 
 <div align="center">
 
 **Priyanshu**
 
-Self-taught, still learning every day — building this as my own way of understanding cybersecurity history properly, and hoping it makes the subject feel a little less intimidating for the next person starting exactly where I once did.
+Self-taught, still learning every day, building this as my own way of understanding cybersecurity history properly, and hoping it makes the subject feel a little less intimidating for the next person starting where I once did.
 
 <a href="https://github.com/priyanshu-rawa">
   <img src="https://img.shields.io/badge/GitHub-@priyanshu--rawa-181717?style=for-the-badge&logo=github&logoColor=white&labelColor=0a0f1a" alt="GitHub">
@@ -241,7 +239,7 @@ Self-taught, still learning every day — building this as my own way of underst
 
 <div align="center">
 
-### ⭐ Star History
+### Star history
 
 <a href="https://star-history.com/#priyanshu-rawa/Breach-Timeline&Date">
   <img src="https://api.star-history.com/svg?repos=priyanshu-rawa/Breach-Timeline&type=Date" alt="Star History Chart" width="600">
@@ -253,9 +251,9 @@ Self-taught, still learning every day — building this as my own way of underst
 
 <div align="center">
 
-If this project taught you something new, or you simply enjoyed exploring it, a star would genuinely mean a lot. This project is brand new with no history behind it yet — every single star is how the next curious person actually finds their way here.
+If this project taught you something new, or you just enjoyed exploring it, a star would genuinely mean a lot. It's brand new with no history behind it yet, every star is how the next curious person finds their way here.
 
-**[⭐ Star this repo](https://github.com/priyanshu-rawa/Breach-Timeline)** · **[🐛 Report an issue](https://github.com/priyanshu-rawa/Breach-Timeline/issues)** · **[🔀 Open a pull request](https://github.com/priyanshu-rawa/Breach-Timeline/pulls)**
+**[⭐ Star this repo](https://github.com/priyanshu-rawa/Breach-Timeline)** · **[Report an issue](https://github.com/priyanshu-rawa/Breach-Timeline/issues)** · **[Open a pull request](https://github.com/priyanshu-rawa/Breach-Timeline/pulls)**
 
 </div>
 
