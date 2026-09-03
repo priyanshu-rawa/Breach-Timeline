@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { DECADES } from '@/lib/utils';
 import type { Attack } from '@/data/attacks';
+import { buttery } from '@/lib/motion';
 
 export function StatsChart({ attacks }: { attacks: Attack[] }) {
   const counts = DECADES.map((d) => attacks.filter((a) => a.year >= d && a.year < d + 10).length);
@@ -25,7 +26,7 @@ export function StatsChart({ attacks }: { attacks: Attack[] }) {
                     initial={{ height: 0 }}
                     whileInView={{ height: `${heightPct}%` }}
                     viewport={{ once: true, amount: 0.6 }}
-                    transition={{ duration: 0.9, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                    transition={{ ...buttery, delay: i * 0.08 }}
                     className="w-full rounded-full bg-gradient-to-t from-accent to-accent-cyan"
                   />
                 </div>

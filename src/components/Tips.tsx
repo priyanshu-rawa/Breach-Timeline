@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { tips } from '@/data/tips';
+import { buttery, butteryHover } from '@/lib/motion';
 
 export function Tips() {
   return (
@@ -20,10 +21,11 @@ export function Tips() {
             return (
               <motion.div
                 key={tip.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, delay: Math.min(i * 0.05, 0.3) }}
+                transition={{ ...buttery, delay: Math.min(i * 0.05, 0.3) }}
+                whileHover={{ y: -4, transition: butteryHover }}
                 className="glass-card rounded-2xl p-6"
               >
                 <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-accent/15 text-accent">

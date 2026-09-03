@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { protectEntries } from '@/data/protect';
+import { buttery, butteryHover } from '@/lib/motion';
 
 export function Protect() {
   return (
@@ -40,8 +41,8 @@ export function Protect() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, delay: i * 0.06 }}
-                whileHover={{ y: -4 }}
+                transition={{ ...buttery, delay: Math.min(i * 0.06, 0.3) }}
+                whileHover={{ y: -4, transition: butteryHover }}
                 className="glass-card group flex flex-col rounded-2xl p-6"
               >
                 <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-accent/15 text-accent">

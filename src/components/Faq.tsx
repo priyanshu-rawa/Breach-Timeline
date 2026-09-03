@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { faqs } from '@/data/faqs';
+import { buttery, butteryHover } from '@/lib/motion';
 
 function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
   const [open, setOpen] = useState(false);
@@ -12,7 +13,7 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.4, delay: Math.min(index * 0.05, 0.25) }}
+      transition={{ ...buttery, delay: Math.min(index * 0.05, 0.25) }}
       className="glass-card overflow-hidden rounded-2xl"
     >
       <button
@@ -24,7 +25,7 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
         <span>{q}</span>
         <motion.span
           animate={{ rotate: open ? 180 : 0 }}
-          transition={{ duration: 0.25 }}
+          transition={butteryHover}
           className="shrink-0 text-ink-muted"
         >
           <ChevronDown size={16} />
@@ -36,7 +37,7 @@ function FaqItem({ q, a, index }: { q: string; a: string; index: number }) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
             <p className="px-5 pb-5 text-sm leading-relaxed text-ink-secondary">{a}</p>

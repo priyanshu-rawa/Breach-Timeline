@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useTheme } from 'next-themes';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Bug, Shuffle, Share2, Moon, Sun, Check } from 'lucide-react';
+import { butteryHover } from '@/lib/motion';
 
 function IconButton({
   label,
@@ -20,8 +21,8 @@ function IconButton({
       aria-label={label}
       title={label}
       onClick={onClick}
-      whileHover={{ y: -2 }}
-      whileTap={{ scale: 0.92 }}
+      whileHover={{ y: -2, transition: butteryHover }}
+      whileTap={{ scale: 0.92, transition: butteryHover }}
       className="grid h-10 w-10 place-items-center rounded-full border border-border bg-bg-card text-ink-secondary transition-colors hover:border-accent hover:text-accent"
     >
       {children}
@@ -37,6 +38,8 @@ export function Navbar({ onRandom }: { onRandom: () => void }) {
   useEffect(() => setMounted(true), []);
 
   const isDark = resolvedTheme !== 'light';
+  const { scrollY } = useScroll();
+  const shadowOpacity = useTransform(scrollY, [0, 80], [0, 1]);
 
   function handleShare() {
     const url = window.location.href;
@@ -55,8 +58,18 @@ export function Navbar({ onRandom }: { onRandom: () => void }) {
   }
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border bg-bg-primary/70 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+    <nav className="sticky top-0 z-50 border-b border-transparent bg-bg-primary/70 backdrop-blur-xl">
+      <motion.div
+        aria-hidden="true"
+        style={{ opacity: shadowOpacity }}
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-border"
+      />
+      <motion.div
+        aria-hidden="true"
+        style={{ opacity: shadowOpacity }}
+        className="pointer-events-none absolute inset-x-0 -bottom-4 h-4 bg-gradient-to-b from-black/[0.06] to-transparent"
+      />
+      <div className="relative mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
         <a href="#" className="flex items-center gap-2 text-lg font-extrabold tracking-tight">
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent/15 text-accent">
             <Bug size={18} />

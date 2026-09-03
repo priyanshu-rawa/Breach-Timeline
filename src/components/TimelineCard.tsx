@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown, BookOpen, ExternalLink } from 'lucide-react';
 import type { Attack } from '@/data/attacks';
 import { BADGE_COLOR, getIconForType } from '@/lib/utils';
+import { buttery, butteryHover } from '@/lib/motion';
 
 interface TimelineCardProps {
   attack: Attack;
@@ -24,10 +25,12 @@ export const TimelineCard = forwardRef<HTMLDivElement, TimelineCardProps>(functi
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 36, scale: 0.97 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.5, delay: Math.min(index * 0.04, 0.3) }}
+      transition={{ ...buttery, delay: Math.min(index * 0.04, 0.3) }}
+      whileHover={{ y: -4, transition: butteryHover }}
+      whileTap={{ scale: 0.99 }}
       animate={highlighted ? { borderColor: 'var(--accent)' } : { borderColor: 'var(--border-color)' }}
       className="glass-card relative rounded-2xl border p-6 pl-16 transition-shadow hover:shadow-card sm:pl-20"
     >
@@ -68,7 +71,7 @@ export const TimelineCard = forwardRef<HTMLDivElement, TimelineCardProps>(functi
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
             <div className="mb-4 rounded-xl border border-border bg-bg-secondary/50 p-4">
@@ -107,7 +110,7 @@ export const TimelineCard = forwardRef<HTMLDivElement, TimelineCardProps>(functi
         className="flex items-center gap-1.5 text-sm font-medium text-accent"
       >
         <span>{open ? 'Read less' : 'Read more'}</span>
-        <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.25 }}>
+        <motion.span animate={{ rotate: open ? 180 : 0 }} transition={butteryHover}>
           <ChevronDown size={14} />
         </motion.span>
       </button>

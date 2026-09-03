@@ -1,14 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion';
 import { Zap, ChevronDown } from 'lucide-react';
+import { butteryHover } from '@/lib/motion';
 
 const words = ['Cyber', 'Attack', 'Timeline'];
 
 function Counter({ value, format }: { value: number; format?: (n: number) => string }) {
   const motionVal = useMotionValue(0);
-  const spring = useSpring(motionVal, { stiffness: 60, damping: 20 });
+  const spring = useSpring(motionVal, { stiffness: 90, damping: 24, mass: 0.6 });
   const [display, setDisplay] = useState('0');
 
   useEffect(() => {
@@ -30,9 +31,15 @@ export function Hero({
 }: {
   stats: { total: number; decades: number; impact: number };
 }) {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
+
   return (
-    <header className="relative overflow-hidden px-5 pb-20 pt-20 text-center sm:pt-28">
-      <div className="mx-auto flex max-w-3xl flex-col items-center">
+    <header ref={ref} className="relative overflow-hidden px-5 pb-20 pt-20 text-center sm:pt-28">
+      <motion.div style={{ y, opacity, scale }} className="mx-auto flex max-w-3xl flex-col items-center">
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -113,10 +120,11 @@ export function Hero({
             <ChevronDown size={16} />
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
 
-      <div
+      <motion.div
         aria-hidden="true"
+        style={{ y: useTransform(scrollYProgress, [0, 1], [0, -60]) }}
         className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[600px] w-[900px] -translate-x-1/2 rounded-full bg-accent/20 blur-[120px]"
       />
     </header>

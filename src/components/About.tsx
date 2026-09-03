@@ -2,15 +2,16 @@
 
 import { motion } from 'framer-motion';
 import { Quote } from 'lucide-react';
+import { buttery } from '@/lib/motion';
 
 export function About() {
   return (
     <section aria-label="About this project" className="px-5 py-20">
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, scale: 0.92 }}
+        whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.6 }}
+        transition={buttery}
         className="glass-card relative mx-auto max-w-3xl overflow-hidden rounded-3xl p-8 sm:p-12"
       >
         <Quote size={64} className="absolute -right-2 -top-2 text-accent/10" />
