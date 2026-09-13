@@ -20,6 +20,10 @@ Explore how cyberattacks evolved from early internet experiments and worms to mo
 
 </div>
 
+<p align="center">
+  <img src="public/homepage.png" alt="CyberTimeline homepage" width="100%">
+</p>
+
 ---
 
 ## About
