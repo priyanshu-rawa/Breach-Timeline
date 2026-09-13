@@ -16,7 +16,7 @@ Explore how cyberattacks evolved from early internet experiments and worms to mo
 
 <br>
 
-**[Live Site](https://cybertimeline.dev) · [Explore the Timeline](https://cybertimeline.dev/#timeline) · [Open API](https://cybertimeline.dev/api/incidents)**
+**[Live Site](https://breach-timeline-kappa.vercel.app/) · [Explore the Timeline](https://breach-timeline-kappa.vercel.app/#timeline)**
 
 </div>
 
@@ -149,35 +149,6 @@ Topics include:
 ### ❓ FAQ
 
 A dedicated FAQ section answers common questions about cybersecurity incidents, attack techniques, and how to protect against similar threats.
-
----
-
-## Open API
-
-CyberTimeline exposes the incident dataset through a public JSON endpoint:
-
-```text
-/api/incidents
-```
-
-Example:
-
-```bash
-curl https://cybertimeline.dev/api/incidents
-```
-
-The response contains structured information about the incidents displayed by the timeline.
-
-This makes the dataset useful for:
-
-* Learning projects
-* Data visualisation
-* Cybersecurity research
-* Experiments
-* Educational applications
-* Developers building security-related tools
-
-The API does not require an authentication key.
 
 ---
 
