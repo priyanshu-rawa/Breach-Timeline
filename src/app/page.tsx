@@ -1,25 +1,41 @@
-import { AuroraBackground } from '@/components/AuroraBackground';
-import { ScrollProgress } from '@/components/ScrollProgress';
-import { TimelineApp } from '@/components/TimelineApp';
-import { About } from '@/components/About';
-import { Tips } from '@/components/Tips';
-import { Protect } from '@/components/Protect';
-import { Faq } from '@/components/Faq';
-import { Footer } from '@/components/Footer';
+import { Navbar } from "@/components/Navbar";
+import { Hero } from "@/components/Hero";
+import { StatsBar } from "@/components/StatsBar";
+import { Timeline } from "@/components/Timeline";
+import { Evolution } from "@/components/Evolution";
+import { Features } from "@/components/Features";
+import { Benefits } from "@/components/Benefits";
+import { OpenAccess } from "@/components/OpenAccess";
+import { WhyIBuiltThis } from "@/components/WhyIBuiltThis";
+import { HelpfulTips } from "@/components/HelpfulTips";
+import { DeviceProtection } from "@/components/DeviceProtection";
+import { FAQ } from "@/components/FAQ";
+import { CTASection } from "@/components/CTASection";
+import { Footer } from "@/components/Footer";
+import { Ticker } from "@/ui/Ticker";
+import { BackToTop } from "@/ui/BackToTop";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
-      <AuroraBackground />
-      <ScrollProgress />
-      <div className="relative z-10">
-        <TimelineApp />
-        <About />
-        <Tips />
-        <Protect />
-        <Faq />
-        <Footer />
-      </div>
+      <Navbar />
+      <main id="main" className="relative">
+        <Hero />
+        <StatsBar />
+        <Ticker />
+        <Timeline />
+        <Evolution />
+        <Features />
+        <Benefits />
+        <OpenAccess />
+        <WhyIBuiltThis />
+        <HelpfulTips />
+        <DeviceProtection />
+        <FAQ />
+        <CTASection />
+      </main>
+      <Footer />
+      <BackToTop />
     </>
   );
 }

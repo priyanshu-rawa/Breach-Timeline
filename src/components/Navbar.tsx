@@ -1,101 +1,183 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useTheme } from 'next-themes';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Bug, Shuffle, Share2, Moon, Sun, Check } from 'lucide-react';
-import { butteryHover } from '@/lib/motion';
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { navLinks, GITHUB_URL } from "@/data/nav";
+import { PrimaryButton } from "@/ui/PrimaryButton";
+import { ThemeToggle } from "@/ui/ThemeToggle";
+import { Logo } from "@/ui/Logo";
+import { GithubIcon } from "@/ui/icons";
+import { EASE, fadeOnly, reveal } from "@/ui/motion";
 
-function IconButton({
-  label,
-  onClick,
-  children,
-}: {
-  label: string;
-  onClick: () => void;
-  children: React.ReactNode;
-}) {
+const SCROLL_THRESHOLD = 40;
+
+export function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState<string>("");
+  const reduced = useReducedMotion();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > SCROLL_THRESHOLD);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Highlight the nav link for the section currently in view.
+  useEffect(() => {
+    const ids = navLinks.map((l) => l.href.slice(1));
+    const els = ids.map((id) => document.getElementById(id)).filter((el): el is HTMLElement => el !== null);
+    if (els.length === 0) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible[0]) setActive(`#${visible[0].target.id}`);
+      },
+      { rootMargin: "-40% 0px -50% 0px" },
+    );
+    els.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
   return (
-    <motion.button
-      type="button"
-      aria-label={label}
-      title={label}
-      onClick={onClick}
-      whileHover={{ y: -2, transition: butteryHover }}
-      whileTap={{ scale: 0.92, transition: butteryHover }}
-      className="grid h-10 w-10 place-items-center rounded-full border border-border bg-bg-card text-ink-secondary transition-colors hover:border-accent hover:text-accent"
-    >
-      {children}
-    </motion.button>
-  );
-}
+    <header className="fixed inset-x-0 top-0 z-50">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-cyan focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-on-accent"
+      >
+        Skip to content
+      </a>
+      <motion.nav
+        aria-label="Primary"
+        initial={reduced ? { opacity: 0 } : { y: -24, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: EASE }}
+        className={`transition-[background-color,border-color,backdrop-filter] duration-300 ${
+          scrolled || open ? "border-b border-line bg-bg/70 backdrop-blur-xl" : "border-b border-transparent bg-transparent"
+        }`}
+      >
+        <div className="container-content flex h-16 items-center justify-between gap-4">
+          <Logo />
 
-export function Navbar({ onRandom }: { onRandom: () => void }) {
-  const { resolvedTheme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  const [shared, setShared] = useState(false);
+          <ul className="hidden items-center gap-1 md:flex">
+            {navLinks.map((link) => {
+              const isActive = active === link.href;
+              return (
+                <li key={link.href} className="relative">
+                  <a
+                    href={link.href}
+                    aria-current={isActive ? "true" : undefined}
+                    className={`relative inline-flex min-h-11 items-center rounded-full px-3.5 text-sm transition-colors duration-200 ${
+                      isActive ? "text-text" : "text-muted hover:text-text"
+                    }`}
+                  >
+                    {isActive ? (
+                      <motion.span
+                        layoutId="nav-active"
+                        transition={reduced ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 32 }}
+                        className="absolute inset-0 rounded-full bg-fill-hover"
+                      />
+                    ) : null}
+                    <span className="relative">{link.label}</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
 
-  useEffect(() => setMounted(true), []);
-
-  const isDark = resolvedTheme !== 'light';
-  const { scrollY } = useScroll();
-  const shadowOpacity = useTransform(scrollY, [0, 80], [0, 1]);
-
-  function handleShare() {
-    const url = window.location.href;
-    if (navigator.share) {
-      navigator.share({
-        title: 'Cyber Attack Timeline',
-        text: 'Explore the history of cyber attacks from 1988 to today.',
-        url,
-      }).catch(() => {});
-      return;
-    }
-    navigator.clipboard.writeText(url).then(() => {
-      setShared(true);
-      setTimeout(() => setShared(false), 2000);
-    }).catch(() => {});
-  }
-
-  return (
-    <nav className="sticky top-0 z-50 border-b border-transparent bg-bg-primary/70 backdrop-blur-xl">
-      <motion.div
-        aria-hidden="true"
-        style={{ opacity: shadowOpacity }}
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-border"
-      />
-      <motion.div
-        aria-hidden="true"
-        style={{ opacity: shadowOpacity }}
-        className="pointer-events-none absolute inset-x-0 -bottom-4 h-4 bg-gradient-to-b from-black/[0.06] to-transparent"
-      />
-      <div className="relative mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-        <a href="#" className="flex items-center gap-2 text-lg font-extrabold tracking-tight">
-          <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent/15 text-accent">
-            <Bug size={18} />
-          </span>
-          <span>
-            Cyber<span className="text-accent">Timeline</span>
-          </span>
-        </a>
-
-        <div className="flex items-center gap-2">
-          <IconButton label="Jump to a random attack" onClick={onRandom}>
-            <Shuffle size={16} />
-          </IconButton>
-          <IconButton label="Copy a shareable link" onClick={handleShare}>
-            {shared ? <Check size={16} /> : <Share2 size={16} />}
-          </IconButton>
-          {mounted && (
-            <IconButton
-              label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-              onClick={() => setTheme(isDark ? 'light' : 'dark')}
+          <div className="hidden items-center gap-2 md:flex">
+            <ThemeToggle />
+            <a
+              href={GITHUB_URL}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="CyberTimeline on GitHub"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full text-muted transition-colors hover:bg-fill-hover hover:text-text"
             >
-              {isDark ? <Moon size={16} /> : <Sun size={16} />}
-            </IconButton>
-          )}
+              <GithubIcon className="h-5 w-5" />
+            </a>
+            <PrimaryButton href="#timeline">Launch App</PrimaryButton>
+          </div>
+
+          <div className="flex items-center gap-1 md:hidden">
+            <ThemeToggle />
+            <button
+              type="button"
+              onClick={() => setOpen((v) => !v)}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              aria-label={open ? "Close menu" : "Open menu"}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full text-text transition-colors hover:bg-fill-hover"
+            >
+              {open ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
+            </button>
+          </div>
         </div>
-      </div>
-    </nav>
+      </motion.nav>
+
+      <AnimatePresence>
+        {open ? (
+          <motion.div
+            id="mobile-menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: EASE }}
+            className="fixed inset-0 top-16 z-40 bg-bg/90 backdrop-blur-2xl md:hidden"
+          >
+            <motion.ul
+              initial="hidden"
+              animate="visible"
+              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.07, delayChildren: 0.1 } } }}
+              className="container-content flex flex-col gap-2 pt-8"
+            >
+              {navLinks.map((link) => (
+                <motion.li key={link.href} variants={reduced ? fadeOnly : reveal}>
+                  <a
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="block rounded-xl px-4 py-4 font-heading text-2xl font-medium text-text transition-colors hover:bg-fill-hover"
+                  >
+                    {link.label}
+                  </a>
+                </motion.li>
+              ))}
+              <motion.li variants={reduced ? fadeOnly : reveal} className="mt-6 flex items-center gap-3 px-4">
+                <PrimaryButton href="#timeline" className="flex-1" size="lg">
+                  Launch App
+                </PrimaryButton>
+                <a
+                  href={GITHUB_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="CyberTimeline on GitHub"
+                  className="inline-flex h-13 w-13 items-center justify-center rounded-full border border-line text-text"
+                >
+                  <GithubIcon className="h-5 w-5" />
+                </a>
+              </motion.li>
+            </motion.ul>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </header>
   );
 }

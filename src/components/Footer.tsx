@@ -1,85 +1,102 @@
-'use client';
+"use client";
 
-import { Bug, Github, GitBranch, ArrowUp, Heart } from 'lucide-react';
+import { ArrowUp } from "lucide-react";
+import { Logo } from "@/ui/Logo";
+import { GitForkIcon, GithubIcon } from "@/ui/icons";
+
+export const AUTHOR_NAME = "Priyanshu Rawat";
+export const GITHUB_PROFILE_URL = "https://github.com";
+export const SOURCE_CODE_URL = "https://github.com";
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-border px-5 py-16">
-      <div className="mx-auto max-w-6xl">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-[2fr_1fr_1fr]">
-          <div>
-            <div className="mb-3 flex items-center gap-2 text-lg font-extrabold">
-              <span className="grid h-8 w-8 place-items-center rounded-lg bg-accent/15 text-accent">
-                <Bug size={18} />
-              </span>
-              <span>
-                Cyber<span className="text-accent">Timeline</span>
-              </span>
-            </div>
-            <p className="max-w-sm text-sm text-ink-secondary">
-              A self-taught deep dive into the attacks that shaped digital security — built to
-              make cybersecurity history a little less intimidating.
+    <footer className="border-t border-line bg-surface/80">
+      <div className="container-content py-14 md:py-18">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
+          {/* Brand & Mission Statement */}
+          <div className="md:col-span-6 flex flex-col items-start">
+            <Logo size="md" />
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted">
+              A self-taught deep dive into the attacks that shaped digital security — built to make cybersecurity
+              history a little less intimidating.
             </p>
           </div>
 
-          <div>
-            <h4 className="mb-3 text-sm font-semibold text-ink-primary">Explore</h4>
-            <div className="flex flex-col gap-2 text-sm text-ink-secondary">
-              <a href="#timeline" className="hover:text-accent">
-                The Timeline
-              </a>
-              <a href="#statsChart" className="hover:text-accent">
-                Attack Stats
-              </a>
-              <a href="#faqList" className="hover:text-accent">
-                FAQ
-              </a>
-            </div>
+          {/* EXPLORE Column */}
+          <div className="md:col-span-3">
+            <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted">EXPLORE</h3>
+            <ul className="mt-4 flex flex-col gap-3 text-sm">
+              <li>
+                <a href="#timeline" className="text-text hover:text-cyan transition-colors">
+                  The Timeline
+                </a>
+              </li>
+              <li>
+                <a href="#timeline" className="text-text hover:text-cyan transition-colors">
+                  Attack Stats
+                </a>
+              </li>
+              <li>
+                <a href="#faq" className="text-text hover:text-cyan transition-colors">
+                  FAQ
+                </a>
+              </li>
+            </ul>
           </div>
 
-          <div>
-            <h4 className="mb-3 text-sm font-semibold text-ink-primary">Connect</h4>
-            <div className="flex flex-col gap-2 text-sm text-ink-secondary">
-              <a
-                href="https://github.com/priyanshu-rawa"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-accent"
-              >
-                <Github size={14} /> GitHub Profile
-              </a>
-              <a
-                href="https://github.com/priyanshu-rawa/breach-timeline"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 hover:text-accent"
-              >
-                <GitBranch size={14} /> Source Code
-              </a>
-              <button
-                type="button"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="flex items-center gap-2 text-left hover:text-accent"
-              >
-                <ArrowUp size={14} /> Back to top
-              </button>
-            </div>
+          {/* CONNECT Column */}
+          <div className="md:col-span-3">
+            <h3 className="font-mono text-xs uppercase tracking-[0.2em] text-muted">CONNECT</h3>
+            <ul className="mt-4 flex flex-col gap-3 text-sm">
+              <li>
+                <a
+                  href={GITHUB_PROFILE_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 text-text hover:text-cyan transition-colors"
+                >
+                  <GithubIcon className="h-4 w-4 shrink-0 text-muted" />
+                  <span>GitHub Profile</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={SOURCE_CODE_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 text-text hover:text-cyan transition-colors"
+                >
+                  <GitForkIcon className="h-4 w-4 shrink-0 text-muted" />
+                  <span>Source Code</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#main"
+                  className="inline-flex items-center gap-2 text-text hover:text-cyan transition-colors"
+                >
+                  <ArrowUp className="h-4 w-4 shrink-0 text-muted" aria-hidden="true" />
+                  <span>Back to top</span>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center gap-2 border-t border-border pt-6 text-center text-sm text-ink-muted">
-          <p className="flex items-center gap-1.5">
-            Built with <Heart size={13} className="fill-accent-amber text-accent-amber" /> by{' '}
+        {/* Bottom Attribution Bar */}
+        <div className="mt-14 flex flex-col gap-3 border-t border-line/60 pt-8 text-xs sm:text-sm text-muted md:flex-row md:items-center md:justify-between">
+          <p>
+            Built with ❤️ by{" "}
             <a
-              href="https://github.com/priyanshu-rawa"
+              href={GITHUB_PROFILE_URL}
               target="_blank"
-              rel="noopener noreferrer"
-              className="text-ink-secondary hover:text-accent"
+              rel="noreferrer"
+              className="font-medium text-cyan hover:underline"
             >
-              Priyanshu Rawat
+              {AUTHOR_NAME}
             </a>
           </p>
-          <p>Data sourced from public cybersecurity archives</p>
+          <p className="font-mono text-xs text-muted/80">Data sourced from public cybersecurity archives</p>
         </div>
       </div>
     </footer>
